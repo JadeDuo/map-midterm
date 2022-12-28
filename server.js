@@ -48,6 +48,15 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//auto-login for midterm presentation
+app.get('/login/:id', (req, res) => {
+  // set the cookie
+  req.session.user_id = req.params.id;
+
+  //redirect the user
+  res.redirect('/');
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
