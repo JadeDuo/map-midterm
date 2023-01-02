@@ -55,7 +55,7 @@ const initMap = () => {
       .then(res => {
         for (const marker of res){
           const {lat, lng, location_name, info, img_link, img_src} = marker
-          
+
           markerArray.push({
             coordinates: { lat: Number(lat), lng: Number(lng) },
             iconImage: img_src,
@@ -91,6 +91,7 @@ const initMap = () => {
       
     let lat = marker.getPosition().lat();
     let lng = marker.getPosition().lng();
+    
     console.log(`lat: ${lat}, lng: ${lng}`);
     console.log('marker: ', marker);
     

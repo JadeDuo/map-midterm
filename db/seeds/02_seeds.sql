@@ -7,11 +7,11 @@ VALUES
 
 INSERT INTO icons (icon_name, img_src)
 VALUES 
-('action', 'icons/fight.png'),
+('action', 'https://i.imgur.com/dcnlvb8.png'),
 ('horror', 'https://img.icons8.com/offices/2x/jason-voorhees.png'),
-('ghost', 'icons/GB.png'),
-('dino', 'icons/dino.png'),
-('scifi', 'icons/ufo.png')
+('ghost', 'https://i.imgur.com/iRf7vKp.png'),
+('dino', 'https://i.imgur.com/sJITgiy.png'),
+('scifi', 'https://i.imgur.com/hoYUNsR.png')
 ;
 
 INSERT INTO markers_info (location_name, info, img_link)
