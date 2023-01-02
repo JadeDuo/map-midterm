@@ -15,20 +15,3 @@ $(() => {
     });
   });
 });
-
-$(() => {
-
-  $.ajax({
-    method: 'GET',
-    url: '/api/markers'
-  })
-  .done((response) => {
-    const $markersList = $('#markers');
-    $markersList.empty();
-
-    for(const marker of response.marker) {
-      $(`<li class="marker">`).text(marker.name).appendTo($markersList);
-    }
-  });
-
-});
