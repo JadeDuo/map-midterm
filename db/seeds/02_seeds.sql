@@ -1,11 +1,11 @@
-INSERT INTO users (username, faveMaps, contributedMaps)
+INSERT INTO users (email)
 VALUES 
-('Jesse@telus.com', 2, 3),
-('Jade@telus.com', 1, 4),
-('John@telus.com', 4, 2)
+('Jesse@telus.com'),
+('Jade@telus.com'),
+('John@telus.com')
 ;
 
-INSERT INTO icons (iconName, imgSrc)
+INSERT INTO icons (icon_name, img_src)
 VALUES 
 ('action', 'icons/fight.png'),
 ('horror', 'https://img.icons8.com/offices/2x/jason-voorhees.png'),
@@ -14,7 +14,7 @@ VALUES
 ('scifi', 'icons/ufo.png')
 ;
 
-INSERT INTO markersInfo (locationName, info, imgLink)
+INSERT INTO markers_info (location_name, info, img_link)
 VALUES
   ('Coney Island', 'Home turf for 1979s The Warriors, famous for its amusement park on the beach', 'https://www.bkmag.com/wp-content/uploads/2017/02/the-warriors-coney-island-wonder-wheel.jpg'), 
   ('Times Square', 'Jason Takes Manhattan! The hockey masked killer stalked his victims in this tourist hotspot', 'https://media.gq.com/photos/5ace1aee240ad94792587238/3:2/w_1079,h_719,c_limit/friday-the-13th-jason-takes-manhattan.jpg'),
@@ -23,12 +23,12 @@ VALUES
   ('The Unisphere', 'Will Smith and Tommy-lee Jones shot down a UFO into this during the climax of Men in Black', 'https://images.squarespace-cdn.com/content/v1/5b9ffe0f1137a680c2c08250/1546554958337-1N34XUMWDBTSJRHS6H3S/MIB.jpg')
 ;
 
-INSERT INTO maps (creator_id, title, north, south, east, west, zoom, centerLat, centerLong)
+INSERT INTO maps (creator_id, title, north, south, east, west, zoom, center_lat, center_lng)
 VALUES
   (1, 'New York City', 40.89616039605397, 40.47792645871874, -73.66206301791668, -74.26642371757031, 11, 40.78179630392257, -73.94733313852576)
 ;
 
-INSERT INTO markers (map_id, lat, lng, markerInfo_id, icon_id)
+INSERT INTO markers (map_id, lat, lng, marker_info_id, icon_id)
 VALUES
   (1, 40.57344620639121, -73.97945438586295, 1, 1),
   (1, 40.75912745350073, -73.98517989368833, 2, 2),
