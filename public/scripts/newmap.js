@@ -1,4 +1,6 @@
-// let {database} = require('./database')
+let globaloptions = {}
+let globalbounds = {}
+
 
 function initMap() {
   let map;
@@ -9,29 +11,51 @@ function initMap() {
   // New Map
   map = new google.maps.Map(document.getElementById("map"), options);
 
-  //this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
-  google.maps.event.addListener(map, 'idle', function (ev) {
-    let bounds = map.getBounds();
-    console.log('bounds: ', bounds);
+//this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
+google.maps.event.addListener(map, 'idle', function (ev) {
+  let bounds = map.getBounds();
+  console.log('bounds: ', bounds);
 
-    let ne = bounds.getNorthEast(); // LatLng of the north-east corner
+  // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
+  let ne = bounds.getNorthEast();
+  let sw = bounds.getSouthWest();
+  let nw = new google.maps.LatLng(ne.lat(), sw.lng());
+  let se = new google.maps.LatLng(sw.lat(), ne.lng());
 
-    let sw = bounds.getSouthWest(); // LatLng of the south-west corder
+  console.log(`NE: ${ne} SE: ${se} NW: ${nw} SW: ${sw}`)
+});
 
-    let nw = new google.maps.LatLng(ne.lat(), sw.lng());
-
-    let se = new google.maps.LatLng(sw.lat(), ne.lng());
-
-    console.log(`NE: ${ne} SE: ${se} NW: ${nw} SW: ${sw}`)
-  });
-
-  //this tracks the zoom level of the current google map window so it can be saved to the new map as well
-  google.maps.event.addListener(map, 'zoom_changed', function () {
-    let zoom = map.getZoom();
-    console.log(zoom);
-  });
+//this tracks the zoom level of the current google map window so it can be saved to the new map as well
+google.maps.event.addListener(map, 'zoom_changed', function () {
+  let zoom = map.getZoom();
+  console.log(zoom);
+});
 
 }
 
 window.initMap = initMap;
+
+
+
+
+//MAP FORM DATA /////////////////////////
+
+$(document).ready(() => {
+
+  function getData(form) {
+    var formData = new FormData(form);
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+
+    console.log(Object.fromEntries(formData));
+  }
+
+  document.getElementById("map-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    getData(e.target);
+  });
+
+  })
 
