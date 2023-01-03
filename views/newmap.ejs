@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Create a new Map</title>
-  <script src="/scripts/newmap.js"></script>
+
   <link rel="stylesheet" href="styles/styles.css">
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script src="/scripts/newmap.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap" async defer></script>
 
 </head>
@@ -30,19 +34,24 @@
       <li><p>Zoom in/out to determine the boundaries for the new map, it will match this current window</p></li>
       <li><p>Fill out the fields below and save!</p></li>
     </ul>
-      <form id ="mapForm" action ="api/newmaps" method ="post">
+      <form id ="map-form">
         <fieldset>
           <legend>New Map</legend>
-          <div class="form">
+          <div>
             <table>
               <tr>
-                <td class="label"><label for="title">Map Title:</label></td>
-                <td><input class="field" id="marker-title" type="text"></td>
+                <td class="label"><label for="map-title">Map Title:</label></td>
+                <td><input class="field" id="map-title" type="text" name="title"></td>
               </tr>
               <tr>
-                <td class="label"><label for="marker-image">Something else:</label></td>
-                <td><input class="field" id="marker-image" type="text"></td>
+                <td class="label"><label for="map-thumbnail">Map Thumbnail Link:</label></td>
+                <td><input class="field" id="map-thumbnail" type="text" name="thumb"></td>
               </tr>
+              <div class="error">
+                <span><i class="fa-solid fa-triangle-exclamation"></i></span>
+                <span class="error-message"></span>
+                <span><i class="fa-solid fa-triangle-exclamation"></i></span>
+              </div>
               <tr><td class="label"><button type="submit">Save New Map!</button></td></tr>
             </table>
           </div>

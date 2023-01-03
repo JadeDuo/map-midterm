@@ -1,11 +1,11 @@
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const mapQueries = require('../db/queries/maps');
 
 router.get('/', (req, res) => {
-  userQueries.getUsers()
-    .then(users => {
-      res.json({ users });
+  mapQueries.getMaps()
+    .then(maps => {
+      res.json({ maps });
     })
     .catch(err => {
       res
