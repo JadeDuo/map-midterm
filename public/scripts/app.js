@@ -1,4 +1,3 @@
-// let {database} = require('server/database.js')
 let testmap, tempMarker, markers = [];
 
 const getOptions = () => {
