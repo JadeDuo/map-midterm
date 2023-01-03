@@ -12,7 +12,7 @@ const getOptions = () => {
 
     options = {
       center: { lat: Number(lat), lng: Number(lng) },
-      restrictions: {
+      restriction: {
         latLngBounds: {
           north: Number(north),
           south: Number(south),
@@ -24,6 +24,7 @@ const getOptions = () => {
       zoom: Number(zoom)
     }
 
+    console.log(options);
     return options;
   })
 };
@@ -129,16 +130,16 @@ const initMap = () => {
 
       google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
 
-      // add event listeners for the pin status buttons
-      document
-        .getElementById("show-markers")
-        .addEventListener("click", showMarkers);
-      document
-        .getElementById("hide-markers")
-        .addEventListener("click", hideMarkers);
-      document
-        .getElementById("delete-markers")
-        .addEventListener("click", deleteMarkers);
+      // // add event listeners for the pin status buttons
+      // document
+      //   .getElementById("show-markers")
+      //   .addEventListener("click", showMarkers);
+      // document
+      //   .getElementById("hide-markers")
+      //   .addEventListener("click", hideMarkers);
+      // document
+      //   .getElementById("delete-markers")
+      //   .addEventListener("click", deleteMarkers);
     })
     .then(() => {
       addMarkersArray()

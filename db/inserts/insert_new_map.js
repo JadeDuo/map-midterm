@@ -7,8 +7,11 @@ const db = require('../connection');
  */
  const addMap = function (map) {
 
-  const insertNewMap = `INSERT INTO maps (creator_id, title, north, south, east, west, zoom, center_lat, center_lng)
-  VALUES ('something')RETURNING *;`;
+  const insertNewMap = `
+  INSERT INTO maps (creator_id, title, north, south, east, west, zoom, center_lat, center_lng)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  RETURNING *;
+  `;
   const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
 
   return pool.query(insertNewMap, values)

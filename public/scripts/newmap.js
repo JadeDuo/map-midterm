@@ -1,6 +1,4 @@
-let globaloptions = {}
-let globalbounds = {}
-
+let globalMapInfo = {};
 
 function initMap() {
   let map;
@@ -11,45 +9,43 @@ function initMap() {
   // New Map
   map = new google.maps.Map(document.getElementById("map"), options);
 
-//this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
-google.maps.event.addListener(map, 'idle', function (ev) {
-  let bounds = map.getBounds();
-  console.log('bounds: ', bounds);
+  //this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
+  google.maps.event.addListener(map, 'idle', () => {
 
-  // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
-  let ne = bounds.getNorthEast();
-  let sw = bounds.getSouthWest();
-  let nw = new google.maps.LatLng(ne.lat(), sw.lng());
-  let se = new google.maps.LatLng(sw.lat(), ne.lng());
+    let bounds = map.getBounds();
 
-  console.log(`NE: ${ne} SE: ${se} NW: ${nw} SW: ${sw}`)
-});
+    // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
+    let n = bounds.getNorthEast().toJSON().lat, e = bounds.getNorthEast().toJSON().lng;
+    let s = bounds.getSouthWest().toJSON().lat, w = bounds.getSouthWest().toJSON().lng;
+    let center = bounds.getCenter().toJSON(), zoom = map.getZoom();
 
-//this tracks the zoom level of the current google map window so it can be saved to the new map as well
-google.maps.event.addListener(map, 'zoom_changed', function () {
-  let zoom = map.getZoom();
-  console.log(zoom);
-});
+    globalMapInfo = {
+      n, e, s, w,
+      center_lat: center.lat,
+      center_lng: center.lng,
+      zoom,
+      userid: 2
+    }
 
+  });
 }
 
 window.initMap = initMap;
-
-
-
 
 //MAP FORM DATA /////////////////////////
 
 $(document).ready(() => {
 
-  function getData(form) {
-    var formData = new FormData(form);
+  const getData = form => {
+    let formData = new FormData(form);
+    let arr = []
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
+    for (let pair of formData.entries()) {
+      arr.push(pair[1])
     }
 
-    console.log(Object.fromEntries(formData));
+    globalMapInfo.title = [...arr][0]
+    globalMapInfo.thumb = [...arr][1]
   }
 
   document.getElementById("map-form").addEventListener("submit", function (e) {
@@ -57,5 +53,4 @@ $(document).ready(() => {
     getData(e.target);
   });
 
-  })
-
+})
