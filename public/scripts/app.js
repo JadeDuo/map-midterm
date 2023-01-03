@@ -1,139 +1,149 @@
 // let {database} = require('server/database.js')
-let testmap;
-// store map markers generated from on.click event listener
-let markers = [];
+let testmap, tempMarker, markers = [];
 
-// set restrictions to where map can be scrolled to, locked in on NYC
-const bounds = {
-  north: 40.89616039605397,
-  south: 40.47792645871874,
-  west: -74.26642371757031,
-  east: -73.66206301791668,
+const getOptions = () => {
+  let options = {};
+
+  return $.ajax({
+    method: 'GET',
+    url: '/api/mapsdata'
+  })
+  .then(data => {
+    const { lat, lng, north, south, east, west, zoom } = data.mapsData[0]
+
+    options = {
+      center: { lat: Number(lat), lng: Number(lng) },
+      restrictions: {
+        latLngBounds: {
+          north: Number(north),
+          south: Number(south),
+          west: Number(west),
+          east: Number(east)
+        },
+        strictBounds: false
+      },
+      zoom: Number(zoom)
+    }
+
+    return options;
+  })
 };
 
-// Options for where map
-const options = {
-  center: { lat: 40.78179630392257, lng: -73.94733313852576 },
-  restriction: {latLngBounds: bounds, strictBounds: false},
-  zoom: 11 
+const addMarkersArray = () => {
+  defaultSize = 'height =120px width =198px'
+  markerArray = []
+
+  $.ajax({
+    method: 'GET',
+    url: '/api/markers'
+  })
+    .then(data => {
+      for (const marker of data.markers) {
+        const { lat, lng, location_name, info, img_link, img_src } = marker
+
+        markerArray.push({
+          coordinates: { lat: Number(lat), lng: Number(lng) },
+          iconImage: img_src,
+          content: `
+          <div style="width: 200px">
+          <h4>${location_name || '_missing!'}</h4>
+          <p>${info || '_missing!'}</p>
+          <img src="${img_link}" ${defaultSize}>
+          </div>
+          `,
+        })
+      }
+    })
+    .done(() => {
+      markerArray.forEach(properties => addSetMarkers(properties))
+    })
 };
 
-// generate google map with pre-set lat/long and zoom for NYC
-const initMap = () => {
-  testmap = new google.maps.Map(document.getElementById('map'), options);
+const addSetMarkers = properties => {
+  let marker = new google.maps.Marker({
+    animation: google.maps.Animation.DROP,
+    position: properties.coordinates, // take coords from obj passed via addSetMarkers
+    map: testmap,
+    draggable: false, // preloaded markers cant be moved
+  });
 
   // function to add preassigned pins on map load
-  const addSetMarkers = prop => {
-    let marker = new google.maps.Marker({
-      animation: google.maps.Animation.DROP,
-      position: prop.coordinates, // take coords from obj passed via addSetMarkers
-      map: testmap,
-      draggable: false, // preloaded markers cant be moved
-    });
 
-    prop.iconImage && marker.setIcon(prop.iconImage); // if it has an image, use as icon
-  
-    if (prop.content) {
-      let information = new google.maps.InfoWindow({content: prop.content}); // if it has an content, populate into infowindow
+  properties.iconImage && marker.setIcon(properties.iconImage); // if it has an image, use as icon
 
-      // if pin is clicked, open info window for that pin
-      marker.addListener('click', () => information.open(testmap, marker));
-      marker.addListener('mouseout', () => setTimeout(() => information.close(), 5000));
-    }
-  };
+  if (properties.content) {
+    let infoWindow = new google.maps.InfoWindow({ content: properties.content }); // if it has an content, populate into infowindow
 
-  const addMarkersArray = () => {
-    defaultSize = 'height =120px width =198px'
-    markerArray = []
-        
-    $(() => {
-      $.ajax({
-        method: 'GET',
-        url: '/api/markers'
-      })
-      .then(res => res.markers)
-      .then(res => {
-        for (const marker of res){
-          const {lat, lng, location_name, info, img_link, img_src} = marker
+    // if pin is clicked, open info window for that pin
+    marker.addListener('click', () => infoWindow.open({
+      testmap,
+      anchor: marker
+    }));
 
-          markerArray.push({
-            coordinates: { lat: Number(lat), lng: Number(lng) },
-            iconImage: img_src,
-            content: `
-            <div style="width: 200px">
-            <h4>${location_name}</h4>
-            <p>${info}</p>
-            <img src="${img_link}" ${defaultSize}>
-            </div>
-            `,
-          })
-        }
-      })
-      .done(res => {
-        markerArray.forEach(marker => addSetMarkers(marker))
-      })
-    });
-  };
-
-  addMarkersArray(); // Adds all markers in object
-
-  let marker;
-
-  const placeMarker = location => {
-    marker ?
-      marker.setPosition(location) :
-      marker = new google.maps.Marker({
-        position: location,
-        map: testmap,
-        animation: google.maps.Animation.DROP,
-        // draggable: true,
-      });
-      
-    let lat = marker.getPosition().lat();
-    let lng = marker.getPosition().lng();
-    
-    console.log(`lat: ${lat}, lng: ${lng}`);
-    console.log('marker: ', marker);
-    
-    markers.push(marker);
-    showMarkers();
-  };
-  
-  google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
-
-  
-  // add event listeners for the pin status buttons
-  document
-    .getElementById("show-markers")
-    .addEventListener("click", showMarkers);
-  document
-    .getElementById("hide-markers")
-    .addEventListener("click", hideMarkers);
-  document
-    .getElementById("delete-markers")
-    .addEventListener("click", deleteMarkers);
-
+    marker.addListener('mouseout', () => setTimeout(() => infoWindow.close(), 5000));
+  }
 };
 
+const placeMarker = location => {
+  tempMarker ?
+    tempMarker.setPosition(location) :
+    tempMarker = new google.maps.Marker({
+      position: location,
+      map: testmap,
+      animation: google.maps.Animation.DROP,
+    })
+  ;
+
+  let lat = tempMarker.getPosition().lat();
+  let lng = tempMarker.getPosition().lng();
+
+  console.log(`lat: ${lat}, lng: ${lng}`);
+  console.log('marker: ', tempMarker);
+
+  markers.push(tempMarker);
+  showMarkers();
+};
 
 // sets the map on all markers in the array.
 const setMapOnAll = map => {
-  console.log('test', map)
   for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
   }
 }
 
-// removes the markers from the map, but keeps them in the array.
-const hideMarkers = () => setMapOnAll(null);
+const hideMarkers = () => setMapOnAll(null); // removes the markers from the map, but keeps them in the array.
 
-// shows any markers currently in the array.
-const showMarkers = () => setMapOnAll(testmap);
+const showMarkers = () => setMapOnAll(testmap); // shows any markers currently in the array.
 
 // deletes all markers in the array by removing references to them.
 const deleteMarkers = () => {
   hideMarkers();
   markers = [];
+};
+
+// generate google map with pre-set lat/long and zoom for NYC
+const initMap = () => {
+  getOptions()
+    .then(options => {
+      testmap = new google.maps.Map(document.getElementById('map'), options);
+      console.log('test map:', testmap)
+
+      google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
+
+      // add event listeners for the pin status buttons
+      document
+        .getElementById("show-markers")
+        .addEventListener("click", showMarkers);
+      document
+        .getElementById("hide-markers")
+        .addEventListener("click", hideMarkers);
+      document
+        .getElementById("delete-markers")
+        .addEventListener("click", deleteMarkers);
+    })
+    .then(() => {
+      addMarkersArray()
+    })
 };
 
 window.initMap = initMap;
