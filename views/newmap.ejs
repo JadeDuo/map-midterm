@@ -30,13 +30,13 @@
       <li><p>Zoom in/out to determine the boundaries for the new map, it will match this current window</p></li>
       <li><p>Fill out the fields below and save!</p></li>
     </ul>
-      <form>
+      <form id ="mapForm" action ="api/newmaps" method ="post">
         <fieldset>
           <legend>New Map</legend>
           <div class="form">
             <table>
               <tr>
-                <td class="label"><label for="marker-title">Map Title:</label></td>
+                <td class="label"><label for="title">Map Title:</label></td>
                 <td><input class="field" id="marker-title" type="text"></td>
               </tr>
               <tr>
