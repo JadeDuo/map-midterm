@@ -129,16 +129,16 @@ const initMap = () => {
 
       google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
 
-      // add event listeners for the pin status buttons
-      document
-        .getElementById("show-markers")
-        .addEventListener("click", showMarkers);
-      document
-        .getElementById("hide-markers")
-        .addEventListener("click", hideMarkers);
-      document
-        .getElementById("delete-markers")
-        .addEventListener("click", deleteMarkers);
+      // // add event listeners for the pin status buttons
+      // document
+      //   .getElementById("show-markers")
+      //   .addEventListener("click", showMarkers);
+      // document
+      //   .getElementById("hide-markers")
+      //   .addEventListener("click", hideMarkers);
+      // document
+      //   .getElementById("delete-markers")
+      //   .addEventListener("click", deleteMarkers);
     })
     .then(() => {
       addMarkersArray()
