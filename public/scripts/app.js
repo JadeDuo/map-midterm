@@ -12,7 +12,7 @@ const getOptions = () => {
 
     options = {
       center: { lat: Number(lat), lng: Number(lng) },
-      restrictions: {
+      restriction: {
         latLngBounds: {
           north: Number(north),
           south: Number(south),
@@ -24,6 +24,7 @@ const getOptions = () => {
       zoom: Number(zoom)
     }
 
+    console.log(options);
     return options;
   })
 };

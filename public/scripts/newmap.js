@@ -1,24 +1,6 @@
-let globaloptions = {}
-let globalbounds = {}
+let globalMapInfo = {};
 
-const getBounds = (data) => {
-  let bounds = map.getBounds();
-  console.log('bounds: ', bounds);
 
-  // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
-  let ne = bounds.getNorthEast();
-  let sw = bounds.getSouthWest();
-  let nw = new google.maps.LatLng(ne.lat(), sw.lng());
-  let se = new google.maps.LatLng(sw.lat(), ne.lng());
-
-  console.log(`NE: ${ne} SE: ${se} NW: ${nw} SW: ${sw}`)
-
-  //this tracks the zoom level of the current google map window so it can be saved to the new map as well
-  google.maps.event.addListener(map, 'zoom_changed', function () {
-  let zoom = map.getZoom();
-  console.log(zoom);
-  });
-}
 
 function initMap() {
   let map;
@@ -30,27 +12,28 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), options);
 
 //this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
-  google.maps.event.addListener(map, 'idle', event => getBounds(event))
+  google.maps.event.addListener(map, 'idle', function () {
 
-  // google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
+  let bounds = map.getBounds();
+  console.log('bounds: ', bounds);
 
-//   let bounds = map.getBounds();
-//   console.log('bounds: ', bounds);
+  // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
+  let ne = bounds.getNorthEast().toJSON();
+  let sw = bounds.getSouthWest().toJSON();
 
-//   // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
-//   let ne = bounds.getNorthEast();
-//   let sw = bounds.getSouthWest();
-//   let nw = new google.maps.LatLng(ne.lat(), sw.lng());
-//   let se = new google.maps.LatLng(sw.lat(), ne.lng());
+  // console.log(`NE: ${ne}  NW: ${nw} SW: ${sw}`)
+  globalMapInfo = {
+    ne,
+    sw,
+    bounds
+  }
+});
 
-//   console.log(`NE: ${ne} SE: ${se} NW: ${nw} SW: ${sw}`)
-// });
-
-// //this tracks the zoom level of the current google map window so it can be saved to the new map as well
-// google.maps.event.addListener(map, 'zoom_changed', function () {
-//   let zoom = map.getZoom();
-//   console.log(zoom);
-// });
+//this tracks the zoom level of the current google map window so it can be saved to the new map as well
+google.maps.event.addListener(map, 'zoom_changed', function () {
+  let zoom = map.getZoom();
+  console.log(zoom);
+});
 
 }
 
