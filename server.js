@@ -51,7 +51,11 @@ app.use('/newmap', newMapRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {path: ""});
+});
+
+app.get('/:any', (req, res) => {
+  res.render('index', {path: req.params.any});
 });
 
 //auto-login for midterm presentation
