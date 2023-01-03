@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a new Map</title>
+  <script src="/scripts/newmap.js"></script>
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap" async defer></script>
+
+</head>
+
+<body>
+  <div class="nav">
+    <h2>This is for testing creating a new Map</h2>
+    <br>
+    <span>
+      <h4>Home</h4>
+      <h4>Maps</h4>
+      <h4>About</h4>
+      <h4>Log-in</h4>
+    </span>
+  </div>
+  <section class="main">
+    <div class="side-content">
+      <h2>How to make a new map:</h2>
+      <ul>
+      <li><p>Find an area to capture in the map on the right</p></li>
+      <li><p>Zoom in/out to determine the boundaries for the new map, it will match this current window</p></li>
+      <li><p>Fill out the fields below and save!</p></li>
+    </ul>
+      <form>
+        <fieldset>
+          <legend>New Map</legend>
+          <div class="form">
+            <table>
+              <tr>
+                <td class="label"><label for="marker-title">Map Title:</label></td>
+                <td><input class="field" id="marker-title" type="text"></td>
+              </tr>
+              <tr>
+                <td class="label"><label for="marker-image">Something else:</label></td>
+                <td><input class="field" id="marker-image" type="text"></td>
+              </tr>
+              <tr><td class="label"><button type="submit">Save New Map!</button></td></tr>
+            </table>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div id="map"></div>
+  </section>
+  <footer>
+    <p>
+    <h5>Home</h5>
+    <h5>Maps</h5>
+    <h5>About</h5>
+    <h5>Log-in</h5>
+    </p>
+  </footer>
+</body>
+
+</html>
