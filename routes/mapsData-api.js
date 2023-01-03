@@ -10,12 +10,16 @@ const router  = express.Router();
 const db = require('../db/connection');
 
 router.get('/', (req, res) => {
-  const query = `SELECT * FROM widgets`;
+  const query = `
+  SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
+  FROM maps
+  WHERE creator_id = 1;
+  `;
   console.log(query);
   db.query(query)
     .then(data => {
-      const widgets = data.rows;
-      res.json({ widgets });
+      const mapsData = data.rows;
+      res.json({ mapsData });
     })
     .catch(err => {
       res

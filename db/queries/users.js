@@ -8,7 +8,3 @@ const getUsers = () => {
 };
 
 module.exports = { getUsers };
-//SELECT markers.lat AS lat, markers.lng AS lng, locationName, info, imgLink, imgSrc
-// FROM markers
-// JOIN markersInfo ON markersInfo.id = markerInfo_id
-// JOIN icons ON icons.id = icon_id;

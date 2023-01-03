@@ -30,7 +30,7 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const markerApiRoutes = require('./routes/markers-api');
-const widgetApiRoutes = require('./routes/widgets-api');
+const mapsDataApiRoutes = require('./routes/mapsData-api');
 const usersRoutes = require('./routes/users');
 
 // Mount all resource routes
@@ -38,7 +38,7 @@ const usersRoutes = require('./routes/users');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
 app.use('/api/markers', markerApiRoutes)
-app.use('/api/widgets', widgetApiRoutes);
+app.use('/api/mapsdata', mapsDataApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
