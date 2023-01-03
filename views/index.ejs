@@ -14,22 +14,25 @@
   <link rel="stylesheet" href="../styles/styles.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script src="/scripts/app.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap" async defer></script>
+  <script src="/build/views.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script src="/scripts/sidebar.js"></script>
+  <script src="/scripts/form.js"></script>
 </head>
 
 <body>
   <div class="nav">
     <span>
-      <h4>Movie Mapper</h4>
-      <h4>My Maps</h4>
-      <h4>Faves</h4>
-      <h4>Log-out</h4>
+      <a href="/">Movie Mapper</a>
+      <a href="/myMaps">My Maps</a>
+      <a href="/edit">Edit</a>
+      <a href="/login">Login</a>
     </span>
   </div>
 
-  <section class="main">
-    <%- include('./partials/edit') %>
+  <section class="main" data-path="<%= path %>">
+    <div class="side-content"></div>
     <div id="map"></div>
   </section>
 
