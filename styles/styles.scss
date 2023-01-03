@@ -1,90 +1,52 @@
 #map {
     position: fixed;
     height: 500px;
-    width: 70%;
+    width: 65%;
     color: #000;
   }
-  
-  #floating-panel {
-    /* position: absolute; */
-    top: 10px;
-    left: 25%;
-    z-index: 5;
-    /* background-color: #fff; */
-    padding: 5px;
-    text-align: center;
-    font-family: "Roboto", "sans-serif";
-    line-height: 30px;
-    padding-left: 10px;
-  }
-  
+
+
   body {
     color: white;
   }
-  
+
   .nav {
     background-color: rgb(67, 105, 170);
     display: flex;
     flex-direction: column;
   }
-  
-  h2 {
-    align-self: center;
-  }
-  
+
   .nav span {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
   }
-  
+
   .main {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     background-color: rgb(149, 172, 210);
   }
-  
+
   .side-content {
+    margin: 1em;
     width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
-  
+
   footer {
     display: flex;
     justify-content: space-evenly;
     color: white;
     background-color: rgb(67, 105, 170);
   }
-  
-  /* input forms for new marker */
-  
-  .label {
-    display: flex;
-    align-content: flex-start;
-    text-align: right;
-    width: 100px;
-    white-space: nowrap;
-    color: #000;
-  }
-  
-  .field {
-    width: 100%;
-    color: #000;
-  }
-  
-  .form {
-    color: #000;
-    width: 100%;
-  }
-  
-  fieldset {
-    margin-top: 20px;
-    color: black
-  }
-  
-  select {
-    margin-left: 17px;
-  }
+
+
+
+
+
+
+
