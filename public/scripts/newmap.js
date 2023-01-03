@@ -1,4 +1,5 @@
-
+let globaloptions = {}
+let globalbounds = {}
 
 
 function initMap() {
@@ -9,9 +10,6 @@ function initMap() {
 
   // New Map
   map = new google.maps.Map(document.getElementById("map"), options);
-}
-
-window.initMap = initMap;
 
 //this tracks the user scrolling around the map, storing the current lat/lng values for the map window to be stored when map is saved at a specific area
 google.maps.event.addListener(map, 'idle', function (ev) {
@@ -32,6 +30,12 @@ google.maps.event.addListener(map, 'zoom_changed', function () {
   let zoom = map.getZoom();
   console.log(zoom);
 });
+
+}
+
+window.initMap = initMap;
+
+
 
 
 //MAP FORM DATA /////////////////////////
