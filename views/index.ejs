@@ -20,70 +20,20 @@
 
 <body>
   <div class="nav">
-    <h2>This is for testing Google map api and markers</h2>
-    <br>
     <span>
-      <h4>Home</h4>
-      <h4>Maps</h4>
-      <h4>About</h4>
-      <h4>Log-in</h4>
+      <h4>Movie Mapper</h4>
+      <h4>My Maps</h4>
+      <h4>Faves</h4>
+      <h4>Log-out</h4>
     </span>
   </div>
 
   <section class="main">
-    <div class="side-content">
-      <h2>This is a side section of content</h2>
-      <p>Some test content</p>
-      <p>Some more test content</p>
-      <p>Some final test content</p>
-
-      <div id="floating-panel">
-        <input id="hide-markers" type="button" value="Hide Markers" />
-        <input id="show-markers" type="button" value="Show Markers" />
-        <input id="delete-markers" type="button" value="Delete Markers" />
-      </div>
-
-      <form>
-        <fieldset>
-          <legend>New Marker</legend>
-          <div class="form">
-            <table>
-              <tr>
-                <td class="label"><label for="marker-title">Marker Title:</label></td>
-                <td><input class="field" id="marker-title" type="text"></td>
-              </tr>
-              <tr>
-                <td class="label"><label for="marker-image">Image link:</label></td>
-                <td><input class="field" id="marker-image" type="text"></td>
-              </tr>
-              <tr>
-                <td class="label"><label for="marker-genre">Select Genre:</label>
-                <select> 
-                  <option value="">--Please choose a category--</option>
-                  <option value="action">Action</option>
-                  <option value="horror">Horror</option>
-                  <option value="comedy">Comedy</option>
-                  <option value="drama">Drama</option>
-                  <option value="romance">Romance</option>
-                </select>
-              </tr>
-              
-            </table>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+    <%- include('./partials/edit') %>
     <div id="map"></div>
   </section>
 
-  <footer>
-    <p>
-    <h5>Home</h5>
-    <h5>Maps</h5>
-    <h5>About</h5>
-    <h5>Log-in</h5>
-    </p>
-  </footer>
+  <%- include('footer') %>
 
 </body>
 
