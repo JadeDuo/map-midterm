@@ -1,4 +1,4 @@
-let globalMapInfo = {};
+let globalMarkers = {};
 
 let testmap, tempMarker, markers = [];
 
