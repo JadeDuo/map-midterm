@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
   FROM maps
   WHERE creator_id = 1;
   `;
-  console.log(query);
   db.query(query)
     .then(data => {
       const mapsData = data.rows;
@@ -45,10 +44,7 @@ router.post('/newmap', (req, res) => {
     const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
 
     return db.query(insertNewMap, values)
-      .then(() => {
-        console.log('succesful')
-        return 'success'
-      })
+      .then(() => {})
       .catch((err) => {
         console.log(err.message);
       })

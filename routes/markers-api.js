@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
   userQueries.getMarkers()
     .then(markers => {
       res.json({ markers });
-      console.log(markers)
     })
     .catch(err => {
       res
