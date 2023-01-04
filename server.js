@@ -32,7 +32,7 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const markerApiRoutes = require('./routes/markers-api');
 const mapsDataApiRoutes = require('./routes/mapsData-api');
-const newmapApiRoutes = require('./routes/newmaps-api');
+
 const usersRoutes = require('./routes/users');
 
 
@@ -42,7 +42,7 @@ const usersRoutes = require('./routes/users');
 app.use('/api/users', userApiRoutes);
 app.use('/api/markers', markerApiRoutes)
 app.use('/api/mapsdata', mapsDataApiRoutes);
-app.use('/api/newmaps', newmapApiRoutes);
+
 app.use('/users', usersRoutes);
 //app.use('/newmap', newMapRoutes);
 // Note: mount other resources here, using the same pattern above
