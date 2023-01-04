@@ -415,6 +415,10 @@ const submitData = (data) => {
   })
 }
 
+app.onLoad(() => {
+  initMap();
+})
+
 }
 app.controllers['favoriteMaps'] = () => {
 //load list of maps using ajax request
