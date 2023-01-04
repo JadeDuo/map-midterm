@@ -145,9 +145,9 @@ const initMap = () => {
     })
 };
 
-<<<<<<< HEAD
+
 window.initMap = initMap;
-<<<<<<< HEAD:public/scripts/app.js
+
 
 // NEW MARKER FORM DATA //////////////////////////
 
@@ -179,13 +179,12 @@ console.log('globalMarker data: ', data);
 }
 
 //{ lat, lng, location_name, info, img_link, img_src }
-=======
+
 $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
   console.log("Loaded google maps")
 });
->>>>>>> ed8092e240362ceed8785491d31e93f599bc7430:app/controllers/viewMap.js
-=======
+
 app.onLoad(() => {
   initMap();
 })
->>>>>>> bc9bb7965cea8bcccd56e78fa02fbc3fb08c85d7
+
