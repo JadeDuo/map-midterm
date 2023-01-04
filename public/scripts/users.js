@@ -1,4 +1,5 @@
 // Client facing scripts here
+//This code was included in skeleton
 $(() => {
   $('#fetch-users').on('click', () => {
     $.ajax({
