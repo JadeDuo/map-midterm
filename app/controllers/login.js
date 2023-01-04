@@ -1,0 +1,3 @@
+app.onLoad(() => {
+  //initMap();
+})

@@ -145,6 +145,7 @@ const initMap = () => {
     })
 };
 
+<<<<<<< HEAD
 window.initMap = initMap;
 <<<<<<< HEAD:public/scripts/app.js
 
@@ -183,3 +184,8 @@ $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9ysk
   console.log("Loaded google maps")
 });
 >>>>>>> ed8092e240362ceed8785491d31e93f599bc7430:app/controllers/viewMap.js
+=======
+app.onLoad(() => {
+  initMap();
+})
+>>>>>>> bc9bb7965cea8bcccd56e78fa02fbc3fb08c85d7

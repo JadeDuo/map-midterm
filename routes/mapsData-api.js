@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
+const mapQueries = require('../db/queries/maps');
 
 
 router.get('/', (req, res) => {
@@ -29,6 +30,7 @@ router.get('/', (req, res) => {
     });
 });
 
+
 router.post('/newmap', (req, res) => {
 
   console.log(req.body)
@@ -41,7 +43,7 @@ router.post('/newmap', (req, res) => {
     RETURNING *;
     `;
     const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
-  
+
     return db.query(insertNewMap, values)
       .then(() => {
         console.log('succesful')
@@ -54,5 +56,18 @@ router.post('/newmap', (req, res) => {
 
   addMap(req.body)
 })
+
+
+router.get('/maps_json', (req, res) => {
+  mapQueries.getMaps()
+    .then(maps => {
+      res.json({ maps });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
 module.exports = router;

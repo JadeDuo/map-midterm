@@ -1,5 +1,4 @@
 //previously app.js
-
 let globalMarkers = {};
 
 let testmap, tempMarker, markers = [];
@@ -127,6 +126,7 @@ const deleteMarkers = () => {
 
 // generate google map with pre-set lat/long and zoom for NYC
 const initMap = () => {
+  console.log("home controller");
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
@@ -142,7 +142,6 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
-});
+app.onLoad(() => {
+  initMap();
+})

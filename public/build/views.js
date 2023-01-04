@@ -1,7 +1,7 @@
 app.views['edit'] = `
   <h2>Add locations to your Map!</h2>
   <p>Click on the map to drop your marker at a filming location.</p>
-  <form>
+  <form id="new-marker-form">
     <div class="form">
       <table>
         <tr>
@@ -9,7 +9,7 @@ app.views['edit'] = `
             <label for="location-name">Location:</label>
           </td>
           <td>
-            <input class="field" id="location-name" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="location" name="location_name" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@ app.views['edit'] = `
             <label for="location-info">Description:</label>
           </td>
           <td>
-            <input class="field" id="location-info" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="info" name="info" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@ app.views['edit'] = `
             <label for="img-link">Image URL:</label>
           </td>
           <td>
-            <input class="field" id="img-link" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="img" name="img_link" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
 
