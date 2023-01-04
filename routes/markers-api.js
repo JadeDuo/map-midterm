@@ -23,32 +23,34 @@ router.get('/', (req, res) => {
 });
 
 //add new marker
-module.exports = router;
-
 router.post('/newmarker', (req, res) => {
-
-  console.log(req.body)
-
   const addMarker = function (marker) {
 
     const insertNewMarker = `
     INSERT INTO markers_info (location_name, info, img_link)
-    VALUES ($1, $2, $3)
-    RETURNING *;
+    VALUES ($1, $2, $3) RETURNING id as marker_info_id;
     `;
     const values = [marker.location_name, marker.info, marker.img_link]
 
     return db.query(insertNewMarker, values)
-      .then(() => {
-        console.log('successful')
-        return 'success'
-      })
+      .then(data => {
+
+        const markerID = data.rows[0].marker_info_id
+        const values = [marker.lat, marker.lng, markerID]
+        const insertNewMarker = `
+        INSERT INTO markers (lat, lng, marker_info_id)
+        VALUES ($1, $2, $3) RETURNING id as marker_info_id;
+        `;
+
+        db.query(insertNewMarker, values)
+          .then(()=> {})
+        })
       .catch((err) => {
         console.log(err.message);
       })
   }
 
   addMarker(req.body)
-})
+});
 
 module.exports = router;

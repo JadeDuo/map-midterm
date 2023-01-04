@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
+const mapQueries = require('../db/queries/maps');
 
 
 router.get('/', (req, res) => {
@@ -28,6 +29,7 @@ router.get('/', (req, res) => {
         .json({ error: err.message });
     });
 });
+
 
 router.post('/newmap', (req, res) => {
 
@@ -56,41 +58,16 @@ router.post('/newmap', (req, res) => {
 })
 
 
-router.post('/newmarker', (req, res) => {
-
-  console.log(req.body)
-
-  const addMarker = function (marker) {
-
-    const insertNewMarker = `
-    INSERT INTO markers_info (location_name, info, img_link)
-    VALUES ($1, $2, $3) RETURNING id as marker_info_id;
-    `;
-    const values = [marker.location_name, marker.info, marker.img_link]
-
-    return db.query(insertNewMarker, values)
-      .then(data => {
-
-        const markerID = data.rows[0].marker_info_id
-        console.log('markerID', markerID)
-        const insertNewMarker = `
-        INSERT INTO markers (lat, lng, marker_info_id)
-        VALUES ($1, $2, $3) RETURNING id as marker_info_id;
-        `;
-
-        const values = [marker.lat, marker.lng, markerID]
-        db.query(insertNewMarker, values)
-          .then(()=> {})
-        })
-      .catch((err) => {
-        console.log(err.message);
-      })
-  }
-
-  addMarker(req.body)
+router.get('/maps_json', (req, res) => {
+  mapQueries.getMaps()
+    .then(maps => {
+      res.json({ maps });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
-
 module.exports = router;
-
-
