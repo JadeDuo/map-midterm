@@ -195,3 +195,7 @@ const submitData = (data) => {
     }
   })
 }
+
+app.onLoad(() => {
+  initMap();
+})
