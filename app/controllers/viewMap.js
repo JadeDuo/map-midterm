@@ -145,6 +145,47 @@ const initMap = () => {
     })
 };
 
+<<<<<<< HEAD
+window.initMap = initMap;
+<<<<<<< HEAD:public/scripts/app.js
+
+// NEW MARKER FORM DATA //////////////////////////
+
+// $(document).ready(() => {
+
+    document.getElementById("edit-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      console.log('globe: ', globalMarker)
+      getData(e.target);
+      submitData(globalMarker);
+    });
+
+// });
+
+const submitData = (data) => {
+
+console.log('globalMarker data: ', data);
+
+// $.ajax({
+//   type: 'post',
+//   url: '/api/mapsdata/newmap',
+//   data: JSON.stringify(data),
+//   contentType: "application/json; charset=utf-8",
+//   success: function (data) {
+//     console.log('post success')
+//   }
+// })
+
+}
+
+//{ lat, lng, location_name, info, img_link, img_src }
+=======
+$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
+  console.log("Loaded google maps")
+});
+>>>>>>> ed8092e240362ceed8785491d31e93f599bc7430:app/controllers/viewMap.js
+=======
 app.onLoad(() => {
   initMap();
 })
+>>>>>>> bc9bb7965cea8bcccd56e78fa02fbc3fb08c85d7
