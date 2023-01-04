@@ -2,6 +2,7 @@
 let globalMapInfo = {};
 
 function initMap() {
+  console.log("New map controller");
   let map;
 
   //start default map at north america
@@ -31,14 +32,13 @@ function initMap() {
   });
 }
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
+app.onLoad(() => {
+  initMap();
 });
 
 //MAP FORM DATA /////////////////////////
 
-$(document).ready(() => {
+
 
   const getData = form => {
     let formData = new FormData(form);
@@ -58,7 +58,7 @@ $(document).ready(() => {
     submitData(globalMapInfo);
   });
 
-});
+
 
 const submitData = (data) => {
 

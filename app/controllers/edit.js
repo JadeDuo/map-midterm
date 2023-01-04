@@ -187,7 +187,7 @@ const submitData = (data) => {
 
   $.ajax({
     type: 'post',
-    url: '/api/mapsdata/newmarker',
+    url: '/api/markers/newmarker',
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
     success: function (data) {
