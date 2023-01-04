@@ -152,8 +152,6 @@ const initMap = () => {
 
 
 
-
-
 //MAP FORM DATA /////////////////////////
 
 $(document).ready(() => {

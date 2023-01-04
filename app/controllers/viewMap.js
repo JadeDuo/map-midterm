@@ -151,8 +151,6 @@ const initMap = () => {
 
 
 
-
-
 app.onLoad(() => {
   initMap();
 })
