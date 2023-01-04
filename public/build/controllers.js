@@ -607,36 +607,7 @@ const initMap = () => {
 window.initMap = initMap;
 
 
-// NEW MARKER FORM DATA //////////////////////////
 
-// $(document).ready(() => {
-
-    document.getElementById("edit-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      console.log('globe: ', globalMarker)
-      getData(e.target);
-      submitData(globalMarker);
-    });
-
-// });
-
-const submitData = (data) => {
-
-console.log('globalMarker data: ', data);
-
-// $.ajax({
-//   type: 'post',
-//   url: '/api/mapsdata/newmap',
-//   data: JSON.stringify(data),
-//   contentType: "application/json; charset=utf-8",
-//   success: function (data) {
-//     console.log('post success')
-//   }
-// })
-
-}
-
-//{ lat, lng, location_name, info, img_link, img_src }
 
 app.onLoad(() => {
   initMap();
