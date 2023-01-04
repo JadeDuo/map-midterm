@@ -34,7 +34,7 @@ const markerApiRoutes = require('./routes/markers-api');
 const mapsDataApiRoutes = require('./routes/mapsData-api');
 const newmapApiRoutes = require('./routes/newmaps-api');
 const usersRoutes = require('./routes/users');
-const newMapRoutes = require('./routes/newmap');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -44,7 +44,7 @@ app.use('/api/markers', markerApiRoutes)
 app.use('/api/mapsdata', mapsDataApiRoutes);
 app.use('/api/newmaps', newmapApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/newmap', newMapRoutes);
+//app.use('/newmap', newMapRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page

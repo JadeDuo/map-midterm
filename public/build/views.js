@@ -1,10 +1,7 @@
-const defaultView = `<h2>Welcome to Movie Mapper</h2>
-  <p>list of all user map links here</p>
-`
-const editView = `
+app.views['edit'] = `
   <h2>Add locations to your Map!</h2>
   <p>Click on the map to drop your marker at a filming location.</p>
-  <form>
+  <form id="new-marker-form">
     <div class="form">
       <table>
         <tr>
@@ -12,7 +9,7 @@ const editView = `
             <label for="location-name">Location:</label>
           </td>
           <td>
-            <input class="field" id="location-name" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="location" name="location_name" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
         <tr>
@@ -20,7 +17,7 @@ const editView = `
             <label for="location-info">Description:</label>
           </td>
           <td>
-            <input class="field" id="location-info" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="info" name="info" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
         <tr>
@@ -28,7 +25,7 @@ const editView = `
             <label for="img-link">Image URL:</label>
           </td>
           <td>
-            <input class="field" id="img-link" type="text" style="width: 200px; margin: .5em" />
+            <input class="field" id="img" name="img_link" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
 
@@ -49,12 +46,15 @@ const editView = `
   </div>
 
 `
-const favoriteMapsView = `
+app.views['favoriteMaps'] = `
   <h2>My Favorite Maps</h2>
-  <p>list of map links here</p>
+  <div id="fave-map-list"></div>
 
 `
-const loginView = `
+app.views['home'] = `<h2>Welcome to Movie Mapper</h2>
+<p>list of all user map links here</p>
+`
+app.views['login'] = `
   <h2>Login Existing User</h2>
 
   <form action="/login" method="POST">
@@ -122,34 +122,37 @@ const loginView = `
   </form>
 
 `
-const myMapsView = `
+app.views['myMaps'] = `
   <h2>My Created Maps</h2>
-  <p>list of map links here</p>
+  <div id="my-map-list"></div>
 `
-const newMapView = `
+app.views['newMap'] = `
   <h2>Create a new map!</h2>
+  <p>Find an area to capture in the map on the right</p>
   <p>Zoom in/out and drag the map to create the boundaries for your markers!</p>
-  <form action="/maps" method="POST">
+  <form id ="map-form">
     <div class="form">
       <table>
         <tr>
-          <td class="lable">
-            <label for="map-title">Title:</label>
-          </td>
-          <td>
-            <input class="field" id="map-title" type="text" style="width: 200px; margin: 1em" />
-          </td>
+          <td class="label"><label for="map-title">Map Title:</label></td>
+          <td><input class="field" id="map-title" type="text" name="title"></td>
         </tr>
         <tr>
-          <td><button type="submit">Submit</button></td>
+          <td class="label"><label for="map-thumbnail">Map Thumbnail Link:</label></td>
+          <td><input class="field" id="map-thumbnail" type="text" name="thumb"></td>
         </tr>
-
+        <div class="error">
+          <span><i class="fa-solid fa-triangle-exclamation"></i></span>
+          <span class="error-message"></span>
+          <span><i class="fa-solid fa-triangle-exclamation"></i></span>
+        </div>
+        <tr><td class="label"><button type="submit">Save New Map!</button></td></tr>
       </table>
     </div>
-  </form>
+</form>
 
 `
-const viewMapView = `
+app.views['viewMap'] = `
   <h2>Current Map Title (needs to be injected)</h2>
   <p>Created by: Inject user</p>
 

@@ -1,3 +1,4 @@
+//previously newmap.js
 let globalMapInfo = {};
 
 function initMap() {
@@ -31,6 +32,9 @@ function initMap() {
 }
 
 window.initMap = initMap;
+$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
+  console.log("Loaded google maps")
+});
 
 //MAP FORM DATA /////////////////////////
 

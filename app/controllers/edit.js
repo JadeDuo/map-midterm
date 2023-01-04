@@ -1,4 +1,7 @@
-let globalMarker = {};
+//previously app.js
+console.log('this is the edit.js controller')
+
+let globalMarkerInfo = {};
 
 let testmap, tempMarker, markers = [];
 
@@ -10,7 +13,10 @@ const getOptions = () => {
     url: '/api/mapsdata'
   })
   .then(data => {
-    const { lat, lng, north, south, east, west, zoom } = data.mapsData[0]
+    const { id, lat, lng, north, south, east, west, zoom } = data.mapsData[0]
+    console.log('this is the id: ', id)
+    console.log('this is our data: ', data)
+    globalMarkerInfo.map_id = id;
 
     options = {
       center: { lat: Number(lat), lng: Number(lng) },
@@ -99,13 +105,11 @@ const placeMarker = location => {
   let lat = tempMarker.getPosition().lat();
   let lng = tempMarker.getPosition().lng();
 
-  globalMarker = {
-    lat,
-    lng
-  }
-
   console.log(`lat: ${lat}, lng: ${lng}`);
   console.log('marker: ', tempMarker);
+
+  globalMarkerInfo.lat = lat,
+  globalMarkerInfo.lng = lng
 
   markers.push(tempMarker);
   showMarkers();
@@ -146,34 +150,48 @@ const initMap = () => {
 };
 
 window.initMap = initMap;
+$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
+  console.log("Loaded google maps")
+});
 
-// NEW MARKER FORM DATA //////////////////////////
 
-// $(document).ready(() => {
 
-    document.getElementById("edit-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      console.log('globe: ', globalMarker)
-      getData(e.target);
-      submitData(globalMarker);
-    });
+//MAP FORM DATA /////////////////////////
 
-// });
+$(document).ready(() => {
+
+  const getData = form => {
+    let formData = new FormData(form);
+    let arr = []
+
+    for (let pair of formData.entries()) {
+      arr.push(pair[1])
+    }
+
+    globalMarkerInfo.location_name = [...arr][0]
+    globalMarkerInfo.info = [...arr][1]
+    globalMarkerInfo.img_link = [...arr][1]
+  }
+
+  document.getElementById("new-marker-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    getData(e.target);
+    submitData(globalMarkerInfo);
+  });
+
+});
 
 const submitData = (data) => {
 
-console.log('globalMarker data: ', data);
+  console.log(data);
 
-// $.ajax({
-//   type: 'post',
-//   url: '/api/mapsdata/newmap',
-//   data: JSON.stringify(data),
-//   contentType: "application/json; charset=utf-8",
-//   success: function (data) {
-//     console.log('post success')
-//   }
-// })
-
+  $.ajax({
+    type: 'post',
+    url: '/api/mapsdata/newmarker',
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    success: function (data) {
+      console.log('post success')
+    }
+  })
 }
-
-//{ lat, lng, location_name, info, img_link, img_src }

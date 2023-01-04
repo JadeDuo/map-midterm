@@ -22,22 +22,25 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/marker', (req, res) => {
+//add new marker
+module.exports = router;
+
+router.post('/newmarker', (req, res) => {
 
   console.log(req.body)
 
-  const addMap = function (map) {
+  const addMarker = function (marker) {
 
-    const insertNewMap = `
-    INSERT INTO maps (creator_id, title, north, south, east, west, zoom, center_lat, center_lng)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    const insertNewMarker = `
+    INSERT INTO markers_info (location_name, info, img_link)
+    VALUES ($1, $2, $3)
     RETURNING *;
     `;
-    const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
+    const values = [marker.location_name, marker.info, marker.img_link]
 
-    return db.query(insertNewMap, values)
+    return db.query(insertNewMarker, values)
       .then(() => {
-        console.log('succesful')
+        console.log('successful')
         return 'success'
       })
       .catch((err) => {
@@ -45,9 +48,7 @@ router.post('/marker', (req, res) => {
       })
   }
 
-  addMap(req.body)
+  addMarker(req.body)
 })
-
-
 
 module.exports = router;

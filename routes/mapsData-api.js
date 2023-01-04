@@ -41,7 +41,7 @@ router.post('/newmap', (req, res) => {
     RETURNING *;
     `;
     const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
-  
+
     return db.query(insertNewMap, values)
       .then(() => {
         console.log('succesful')
@@ -55,4 +55,42 @@ router.post('/newmap', (req, res) => {
   addMap(req.body)
 })
 
+
+router.post('/newmarker', (req, res) => {
+
+  console.log(req.body)
+
+  const addMarker = function (marker) {
+
+    const insertNewMarker = `
+    INSERT INTO markers_info (location_name, info, img_link)
+    VALUES ($1, $2, $3) RETURNING id as marker_info_id;
+    `;
+    const values = [marker.location_name, marker.info, marker.img_link]
+
+    return db.query(insertNewMarker, values)
+      .then(data => {
+
+        const markerID = data.rows[0].marker_info_id
+        console.log('markerID', markerID)
+        const insertNewMarker = `
+        INSERT INTO markers (lat, lng, marker_info_id)
+        VALUES ($1, $2, $3) RETURNING id as marker_info_id;
+        `;
+
+        const values = [marker.lat, marker.lng, markerID]
+        db.query(insertNewMarker, values)
+          .then(()=> {})
+        })
+      .catch((err) => {
+        console.log(err.message);
+      })
+  }
+
+  addMarker(req.body)
+});
+
+
 module.exports = router;
+
+
