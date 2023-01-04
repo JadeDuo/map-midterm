@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/markers');
+const db = require('../db/connection');
 
 router.get('/', (req, res) => {
   userQueries.getMarkers()

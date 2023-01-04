@@ -151,8 +151,6 @@ window.initMap = initMap;
 
 
 
-
-
 app.onLoad(() => {
   initMap();
 })
