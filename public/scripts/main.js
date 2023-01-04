@@ -11,7 +11,24 @@ const app = {
     '/createMap': 'newMap',
     '/viewMap': 'viewMap',
     '/faveMaps': 'favoriteMaps'
-  }
+  },
+  //defers google map callback info until api has loaded.
+  onLoad: function(callback) {
+    if (app.ready) {
+      callback();
+    } else {
+      app.loadCallbacks.push(callback);
+    }
+  },
+  loadCallbacks: [],
+  //Called when google maps api is loaded and ready
+  loaded: function() {
+    app.ready = true;
+    app.loadCallbacks.forEach((cb) => {
+      cb();
+    });
+  },
+  ready: false,
 };
 //when doc loads, check current path and find matching route.
 //using route, updates view and execute linked controller on view load.
@@ -29,8 +46,13 @@ $(document).ready(() => {
     const href = $(this).attr('href');
     const route = app.routes[href];
     const view = app.views[route];
+
     $('.side-content').html(view);
-    app.controllers[currentRoute]();
+    app.controllers[route]();
     window.history.pushState({}, href, href)
   });
 })
+//app.loaded calls the onload callbacks of current controller.
+window.initMap = function() {
+  app.loaded();
+}

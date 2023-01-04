@@ -11,7 +11,24 @@ const app = {
     '/createMap': 'newMap',
     '/viewMap': 'viewMap',
     '/faveMaps': 'favoriteMaps'
-  }
+  },
+  //defers google map callback info until api has loaded.
+  onLoad: function(callback) {
+    if (app.ready) {
+      callback();
+    } else {
+      app.loadCallbacks.push(callback);
+    }
+  },
+  loadCallbacks: [],
+  //Called when google maps api is loaded and ready
+  loaded: function() {
+    app.ready = true;
+    app.loadCallbacks.forEach((cb) => {
+      cb();
+    });
+  },
+  ready: false,
 };
 //when doc loads, check current path and find matching route.
 //using route, updates view and execute linked controller on view load.
@@ -29,11 +46,16 @@ $(document).ready(() => {
     const href = $(this).attr('href');
     const route = app.routes[href];
     const view = app.views[route];
+
     $('.side-content').html(view);
-    app.controllers[currentRoute]();
+    app.controllers[route]();
     window.history.pushState({}, href, href)
   });
 })
+//app.loaded calls the onload callbacks of current controller.
+window.initMap = function() {
+  app.loaded();
+}
 
 app.views['edit'] = `
   <h2>Add locations to your Map!</h2>
@@ -195,6 +217,11 @@ app.views['viewMap'] = `
 
 `
 app.controllers['edit'] = () => {
+//This is a comment
+
+app.onLoad(() => {
+  //initMap();
+})
 
 }
 app.controllers['favoriteMaps'] = () => {
@@ -203,10 +230,13 @@ app.controllers['favoriteMaps'] = () => {
 //build HTML for list of maps data,
 //using jQuery insert HTML into <div id="fave-map-list">
 
+app.onLoad(() => {
+  //initMap();
+})
+
 }
 app.controllers['home'] = () => {
 //previously app.js
-
 let globalMarkers = {};
 
 let testmap, tempMarker, markers = [];
@@ -334,6 +364,7 @@ const deleteMarkers = () => {
 
 // generate google map with pre-set lat/long and zoom for NYC
 const initMap = () => {
+  console.log("home controller");
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
@@ -349,13 +380,15 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
-});
+app.onLoad(() => {
+  initMap();
+})
 
 }
 app.controllers['login'] = () => {
+app.onLoad(() => {
+  //initMap();
+})
 
 }
 app.controllers['myMaps'] = () => {
@@ -364,12 +397,17 @@ app.controllers['myMaps'] = () => {
 //build HTML for list of maps data,
 //using jQuery insert HTML into <div id="my-map-list">
 
+app.onLoad(() => {
+  //initMap();
+})
+
 }
 app.controllers['newMap'] = () => {
 //previously newmap.js
 let globalMapInfo = {};
 
 function initMap() {
+  console.log("New map controller");
   let map;
 
   //start default map at north america
@@ -399,14 +437,13 @@ function initMap() {
   });
 }
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
+app.onLoad(() => {
+  initMap();
 });
 
 //MAP FORM DATA /////////////////////////
 
-$(document).ready(() => {
+
 
   const getData = form => {
     let formData = new FormData(form);
@@ -426,7 +463,7 @@ $(document).ready(() => {
     submitData(globalMapInfo);
   });
 
-});
+
 
 const submitData = (data) => {
 
@@ -587,9 +624,8 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
-});
+app.onLoad(() => {
+  initMap();
+})
 
 }

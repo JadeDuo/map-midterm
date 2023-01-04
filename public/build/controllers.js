@@ -1,4 +1,9 @@
 app.controllers['edit'] = () => {
+//This is a comment
+
+app.onLoad(() => {
+  //initMap();
+})
 
 }
 app.controllers['favoriteMaps'] = () => {
@@ -7,10 +12,13 @@ app.controllers['favoriteMaps'] = () => {
 //build HTML for list of maps data,
 //using jQuery insert HTML into <div id="fave-map-list">
 
+app.onLoad(() => {
+  //initMap();
+})
+
 }
 app.controllers['home'] = () => {
 //previously app.js
-
 let globalMarkers = {};
 
 let testmap, tempMarker, markers = [];
@@ -138,6 +146,7 @@ const deleteMarkers = () => {
 
 // generate google map with pre-set lat/long and zoom for NYC
 const initMap = () => {
+  console.log("home controller");
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
@@ -153,13 +162,15 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
-});
+app.onLoad(() => {
+  initMap();
+})
 
 }
 app.controllers['login'] = () => {
+app.onLoad(() => {
+  //initMap();
+})
 
 }
 app.controllers['myMaps'] = () => {
@@ -168,12 +179,17 @@ app.controllers['myMaps'] = () => {
 //build HTML for list of maps data,
 //using jQuery insert HTML into <div id="my-map-list">
 
+app.onLoad(() => {
+  //initMap();
+})
+
 }
 app.controllers['newMap'] = () => {
 //previously newmap.js
 let globalMapInfo = {};
 
 function initMap() {
+  console.log("New map controller");
   let map;
 
   //start default map at north america
@@ -203,14 +219,13 @@ function initMap() {
   });
 }
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
+app.onLoad(() => {
+  initMap();
 });
 
 //MAP FORM DATA /////////////////////////
 
-$(document).ready(() => {
+
 
   const getData = form => {
     let formData = new FormData(form);
@@ -230,7 +245,7 @@ $(document).ready(() => {
     submitData(globalMapInfo);
   });
 
-});
+
 
 const submitData = (data) => {
 
@@ -391,9 +406,8 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
-$.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAEQNotfXF5yKQ9yskhfsR4t1tMkS1sjSM&callback=initMap", function(data, textStatus, jqxhr) {
-  console.log("Loaded google maps")
-});
+app.onLoad(() => {
+  initMap();
+})
 
 }
