@@ -15,16 +15,16 @@ function initMap() {
     let bounds = map.getBounds();
 
     // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
-    let n = bounds.getNorthEast().toJSON().lat, e = bounds.getNorthEast().toJSON().lng;
-    let s = bounds.getSouthWest().toJSON().lat, w = bounds.getSouthWest().toJSON().lng;
+    let north = bounds.getNorthEast().toJSON().lat, east = bounds.getNorthEast().toJSON().lng;
+    let south = bounds.getSouthWest().toJSON().lat, west = bounds.getSouthWest().toJSON().lng;
     let center = bounds.getCenter().toJSON(), zoom = map.getZoom();
 
     globalMapInfo = {
-      n, e, s, w,
+      north, east, south, west,
       center_lat: center.lat,
       center_lng: center.lng,
       zoom,
-      userid: 2
+      creator_id: 2
     }
 
   });
@@ -51,6 +51,22 @@ $(document).ready(() => {
   document.getElementById("map-form").addEventListener("submit", function (e) {
     e.preventDefault();
     getData(e.target);
+    submitData(globalMapInfo);
   });
 
-})
+});
+
+const submitData = (data) => {
+
+  console.log(data);
+
+  $.ajax({
+    type: 'post',
+    url: '/api/mapsdata/newmap',
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    success: function (data) {
+      console.log('post success')
+    }
+  })
+}

@@ -123,27 +123,6 @@ const deleteMarkers = () => {
   markers = [];
 };
 
-const newMap = (map) => {
-
-  let bounds = map.getBounds();
-
-  // store LatLng of the each corner of the map every time map idles (not being dragged/zoomed)
-  let n = bounds.getNorthEast().toJSON().lat, e = bounds.getNorthEast().toJSON().lng;
-  let s = bounds.getSouthWest().toJSON().lat, w = bounds.getSouthWest().toJSON().lng;
-  let center = bounds.getCenter().toJSON(), zoom = map.getZoom();
-
-  globalMapInfo = {
-    n, e, s, w,
-    center_lat: center.lat,
-    center_lng: center.lng,
-    zoom,
-    userid: 2
-  }
-
-  return console.log(globalMapInfo)
-};
-
-
 // generate google map with pre-set lat/long and zoom for NYC
 const initMap = () => {
   getOptions()
@@ -162,27 +141,3 @@ const initMap = () => {
 };
 
 window.initMap = initMap;
-
-
-// MAP FORM DATA /////////////////////////   <----- If going to single page only
-
-// $(() => {
-
-//   const getData = form => {
-//     let formData = new FormData(form);
-//     let arr = []
-
-//     for (let pair of formData.entries()) {
-//       arr.push(pair[1])
-//     }
-
-//     globalMapInfo.title = [...arr][0]
-//     globalMapInfo.thumb = [...arr][1]
-//   }
-
-//   document.getElementById("map-form").addEventListener("submit", function (e) {
-//     e.preventDefault();
-//     getData(e.target);
-//   });
-
-// })
