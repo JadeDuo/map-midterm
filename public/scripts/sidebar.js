@@ -1,8 +1,11 @@
 const views = {
-  '/': viewMapView,
+  '/': defaultView,
   '/myMaps': myMapsView,
   '/edit': editView,
   '/login': loginView,
+  '/createMap': newMapView,
+  '/viewMap': viewMapView,
+  '/faveMaps': favoriteMapsView
 };
 
 $(document).ready(() => {

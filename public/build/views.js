@@ -1,4 +1,7 @@
-const editView = `<div class="side-content">
+const defaultView = `<h2>Welcome to Movie Mapper</h2>
+  <p>list of all user map links here</p>
+`
+const editView = `
   <h2>Add locations to your Map!</h2>
   <p>Click on the map to drop your marker at a filming location.</p>
   <form>
@@ -45,14 +48,13 @@ const editView = `<div class="side-content">
     <input id="toggle-markers" type="button" value="Toggle Markers" />
   </div>
 
-</div>
 `
-const favoriteMapsView = `<div class="side-content">
+const favoriteMapsView = `
   <h2>My Favorite Maps</h2>
   <p>list of map links here</p>
-</div>
+
 `
-const loginView = `<div class="side-content">
+const loginView = `
   <h2>Login Existing User</h2>
 
   <form action="/login" method="POST">
@@ -118,14 +120,13 @@ const loginView = `<div class="side-content">
       </table>
     </div>
   </form>
-</div>
+
 `
-const myMapsView = `<div class="side-content">
+const myMapsView = `
   <h2>My Created Maps</h2>
   <p>list of map links here</p>
-</div>
 `
-const newMapView = `<div class="side-content">
+const newMapView = `
   <h2>Create a new map!</h2>
   <p>Zoom in/out and drag the map to create the boundaries for your markers!</p>
   <form action="/maps" method="POST">
@@ -146,10 +147,10 @@ const newMapView = `<div class="side-content">
       </table>
     </div>
   </form>
-</div>
+
 `
-const viewMapView = `<div class="side-content">
+const viewMapView = `
   <h2>Current Map Title (needs to be injected)</h2>
   <p>Created by: Inject user</p>
-</div>
+
 `
