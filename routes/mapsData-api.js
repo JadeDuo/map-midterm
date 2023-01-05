@@ -34,7 +34,25 @@ router.get('/my_maps', (req, res) => {
   return db.query(`
   SELECT maps.id, title
   FROM maps
-  JOIN users ON users.id = ${req.session.userID};
+  JOIN users ON users.id = creator_id
+  WHERE creator_id = ${req.session.userID};
+  `)
+  .then(data => {
+    const maps = data.rows;
+    res.json({ maps });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+
+})
+
+router.get('/all_maps', (req, res) => {
+  return db.query(`
+  SELECT maps.id, title
+  FROM maps;
   `)
   .then(data => {
     const maps = data.rows;
