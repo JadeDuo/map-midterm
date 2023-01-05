@@ -1,15 +1,4 @@
-//load list of maps using ajax request
-//will need a query for all maps created by current user
-//build HTML for list of maps data,
-//using jQuery insert HTML into <div id="my-map-list">
-
-app.onLoad(() => {
-  //initMap();
-
-})
-
-
-// Client facing scripts here
+// -------------------- LOAD MAP LISTS & UPDATE MAPS ON CLICK ---------------///
 $(document).ready(() => {
   $.ajax({
     method: 'GET',
@@ -32,13 +21,20 @@ $(document).ready(() => {
       url: e.target.href
     })
     .then((response) => {
+      setMap = mapDisplay(response)
       testmap = new google.maps.Map(document.getElementById('map'), mapDisplay(response)); // Build new map with AJAX return
       addMarkersArray() // Add markers from DB to map
-      google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng)); // Place temp marker on map
       })
   });
 });
 
+
+app.onLoad(() => {
+  //initMap();
+
+})
+
+//------------MAP HELPER FUNCTIONS ------------//
 
 const mapDisplay = (data) => {
   let options = {};
@@ -66,11 +62,7 @@ const mapDisplay = (data) => {
 
   return options;
 }
-
-let loggedInUser;
-let testmap, tempMarker;
-let globalMarkerInfo = {};
-
+//---------- MARKER HELPER FUNCTIONS ----------//
 const addMarkersArray = () => {
   defaultSize = 'height =120px width =198px'
   markerArray = []
@@ -101,9 +93,6 @@ const addMarkersArray = () => {
     })
 };
 
-
-//---------- HELPER FUNCTIONS ----------//
-
 const addSetMarkers = properties => {
   let marker = new google.maps.Marker({
     animation: google.maps.Animation.DROP,
@@ -127,25 +116,4 @@ const addSetMarkers = properties => {
 
     marker.addListener('mouseout', () => setTimeout(() => infoWindow.close(), 5000));
   }
-};
-
-
-const placeMarker = (location) => {
-
-  tempMarker ?
-    tempMarker.setPosition(location) :
-    tempMarker = new google.maps.Marker({
-      position: location,
-      map: testmap,
-      animation: google.maps.Animation.DROP,
-    })
-  ;
-
-  let lat = tempMarker.getPosition().lat();
-  let lng = tempMarker.getPosition().lng();
-
-  console.log('lat:', lat, 'lng:', lng)
-
-  globalMarkerInfo.lat = lat,
-  globalMarkerInfo.lng = lng
 };

@@ -2,6 +2,9 @@ app.onLoad(() => {
   //initMap();
 })
 
+
+// ------------- LOGIN TO USER / SET COOKIES --------------//
+
 $(document).ready(() => {
   console.log(loggedInUser)
   document.getElementById("login-form").addEventListener("submit", event => {
