@@ -26,7 +26,12 @@ const getOptions = () => {
         },
         strictBounds: false
       },
-      zoom: Number(zoom)
+      zoom: Number(zoom),
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      rotateControl: false,
+      fullscreenControl: false
     }
 
     return options;
@@ -152,8 +157,8 @@ $(document).ready(() => {
     let formData = new FormData(form);
     let arr = []
 
-    const genre = $("#genre-id option:checked").val(); 
-  
+    const genre = $("#genre-id option:checked").val();
+
     for (let pair of formData.entries()) {
       arr.push(pair[1])
     }

@@ -5,7 +5,15 @@ function initMap() {
   let map;
 
   //start default map at north america
-  const options = { center: { lat: 49.406001356798896, lng: -96.07921114305863 }, zoom: 4 }
+  const options = {
+    center: { lat: 49.406001356798896, lng: -96.07921114305863 },
+    zoom: 4,
+    zoomControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    rotateControl: false,
+    fullscreenControl: false
+  }
 
   // New Map
   map = new google.maps.Map(document.getElementById("map"), options);
