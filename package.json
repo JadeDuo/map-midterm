@@ -10,11 +10,11 @@
     "db:reset": "node bin/resetdb.js",
     "gulp": "node ./node_modules/gulp/bin/gulp.js build",
     "watch": "node ./node_modules/gulp/bin/gulp.js watch"
-
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "chalk": "^2.4.2",
     "cookie-session": "^2.0.0",
     "dotenv": "^2.0.0",

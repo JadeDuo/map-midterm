@@ -21,7 +21,7 @@ $(document).ready(() => {
       $usersList.empty();
 
       for(const map of response.maps) {
-        $(`<a href="view/:${map.id}">`).text(map.title).appendTo('#my-map-list');
+        $(`<a class="map-list" href="view/:${map.id}">`).text(map.title).appendTo('#my-map-list');
       }
     })
 });

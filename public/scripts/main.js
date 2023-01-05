@@ -51,6 +51,18 @@ $(document).ready(() => {
     app.controllers[route]();
     window.history.pushState({}, href, href)
   });
+
+//temp duplicate code of above to listen to footer
+$("footer a").on('click', function(e) {
+  e.preventDefault();
+  const href = $(this).attr('href');
+  const route = app.routes[href];
+  const view = app.views[route];
+
+  $('.side-content').html(view);
+  app.controllers[route]();
+  window.history.pushState({}, href, href)
+});
 })
 
 let loggedInUser;
