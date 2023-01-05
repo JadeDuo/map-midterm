@@ -5,6 +5,7 @@ $(document).ready(() => {
     url: '/api/mapsdata/my_maps'
   })
     .done((response) => {
+      addMarkersArray() // Take me out if you want
       const $usersList = $('#my-map-list');
       $usersList.empty();
 

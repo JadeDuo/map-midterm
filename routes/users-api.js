@@ -29,4 +29,11 @@ router.post('/', (req, res) => {
     });
 });
 
+router.post('/logout', (req, res) => {
+  console.log(req.session)
+  req.session = null;
+  req.session.destroy();
+  console.log(req.session)
+})
+
 module.exports = router;

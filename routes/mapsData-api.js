@@ -120,7 +120,7 @@ router.post('/newmap', (req, res) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
     `;
-    const values = [map.creator_id, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
+    const values = [req.session.userID, map.title, map.north, map.south, map.east, map.west, map.zoom, map.center_lat, map.center_lng]
 
     return db.query(insertNewMap, values)
       .then(() => {})

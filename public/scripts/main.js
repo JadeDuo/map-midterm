@@ -60,8 +60,20 @@ $("footer a").on('click', function(e) {
   const view = app.views[route];
 
   $('.side-content').html(view);
-  app.controllers[route]();
-  window.history.pushState({}, href, href)
+    app.controllers[route]();
+    window.history.pushState({}, href, href)
+  });
+
+//temp dupe code for button in foot
+$("footer button").on('click', function(e) {
+  e.preventDefault();
+  $.ajax({
+    method: 'POST',
+    url: '/api/users/logout',
+    success: data => console.log('post success')
+  })
+  $(".nav a[href='/']").click();
+  $('#user-name').text('');
 });
 })
 

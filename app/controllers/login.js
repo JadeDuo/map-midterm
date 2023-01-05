@@ -20,7 +20,7 @@ $(document).ready(() => {
     })
     .then((response) => {
       loggedInUser = response.email
-      $('#user-name').text(loggedInUser);
+      $('#user-name').text(`logged-in as: ${loggedInUser}`);
       $(".nav a[href='/myMaps']").click();
     }); 
   }) 

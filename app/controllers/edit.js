@@ -61,6 +61,11 @@ $(document).ready(() => {
     e.preventDefault();
     getData(e.target);
     submitData(globalMarkerInfo);
+    $(".nav a[href='/myMaps']").click();
+    setTimeout(() => {
+      tempMarker = {};
+      addMarkersArray()
+    }, 500);
   });
 
 });

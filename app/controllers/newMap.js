@@ -24,7 +24,6 @@ function initMap() {
       center_lat: center.lat,
       center_lng: center.lng,
       zoom,
-      creator_id: 2
     }
 
   });
@@ -37,6 +36,21 @@ app.onLoad(() => {
     e.preventDefault();
     getData(e.target);
     submitData(globalMapInfo);
+    $(".nav a[href='/myMaps']").click();
+
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: globalMapInfo.center_lat, lng: globalMapInfo.center_lng }, 
+      zoom: globalMapInfo.zoom,
+      restriction: {
+        latLngBounds: {
+          north: globalMapInfo.north,
+          south: globalMapInfo.south,
+          west: globalMapInfo.west,
+          east: globalMapInfo.east
+        },
+        strictBounds: false
+      }
+    });
   });
 });
 
