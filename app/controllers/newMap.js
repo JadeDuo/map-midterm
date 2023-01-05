@@ -1,19 +1,10 @@
-//previously newmap.js
 let globalMapInfo = {};
 
 function initMap() {
   let map;
 
   //start default map at north america
-  const options = {
-    center: { lat: 49.406001356798896, lng: -96.07921114305863 },
-    zoom: 4,
-    zoomControl: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    rotateControl: false,
-    fullscreenControl: false
-  }
+  const options = { center: { lat: 49.406001356798896, lng: -96.07921114305863 }, zoom: 4 }
 
   // New Map
   map = new google.maps.Map(document.getElementById("map"), options);
@@ -41,12 +32,17 @@ function initMap() {
 
 app.onLoad(() => {
   initMap();
+
+  document.getElementById("map-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    getData(e.target);
+    submitData(globalMapInfo);
+  });
 });
 
+
+
 //MAP FORM DATA /////////////////////////
-
-
-
   const getData = form => {
     let formData = new FormData(form);
     let arr = []
@@ -59,16 +55,7 @@ app.onLoad(() => {
     globalMapInfo.thumb = [...arr][1]
   }
 
-  document.getElementById("map-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    getData(e.target);
-    submitData(globalMapInfo);
-  });
-
-
-
 const submitData = (data) => {
-
   $.ajax({
     type: 'post',
     url: '/api/mapsdata/newmap',

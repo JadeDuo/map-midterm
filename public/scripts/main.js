@@ -65,7 +65,9 @@ $("footer a").on('click', function(e) {
 });
 })
 
+// Logged in user global cookie settings //
 let loggedInUser;
+
 
 //app.loaded calls the onload callbacks of current controller.
 window.initMap = function() {

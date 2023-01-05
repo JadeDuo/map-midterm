@@ -8,7 +8,9 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
-const { route } = require('./markers-api');
+
+
+//---------- GET ROUTES ----------//
 
 router.get('/', (req, res) => {
   const query = `
@@ -28,6 +30,68 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/my_maps', (req, res) => {
+  return db.query(`
+  SELECT maps.id, title
+  FROM maps
+  JOIN users ON users.id = ${req.session.userID};
+  `)
+  .then(data => {
+    const maps = data.rows;
+    res.json({ maps });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+
+})
+
+router.get('/maps_json', (req, res) => {
+  const queryString = `
+  SELECT creator_id, maps.id, title, north, south, east, west, zoom, center_lat, center_lng
+  FROM maps
+  JOIN users ON users.id = maps.creator_id;
+  `
+  return db.query(queryString)
+    .then(data => {
+      data.rows;
+    })
+    .then(maps => {
+      res.json({ maps });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+  const viewMapQuery = `
+  SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
+  FROM maps
+  WHERE id = ${id || 1};
+  `
+  
+  db.query(viewMapQuery)
+  .then(data => {
+    const mapsData = data.rows;
+    console.log('back-end:', id, mapsData)
+    res.json({mapsData})
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+  
+})
+
+
+//---------- POST ROUTES ----------//
 
 router.post('/newmap', (req, res) => {
 
@@ -50,43 +114,5 @@ router.post('/newmap', (req, res) => {
   addMap(req.body)
 })
 
-router.get('/my_maps', (req, res) => {
-  return db.query(`
-  SELECT maps.id, title
-  FROM maps
-  JOIN users ON users.id = ${req.session.userID};
-  `)
-  .then(data => {
-    const maps = data.rows;
-    res.json({ maps });
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-
-})
-
-
-router.get('/maps_json', (req, res) => {
-  const queryString = `
-  SELECT creator_id, maps.id, title, north, south, east, west, zoom, center_lat, center_lng
-  FROM maps
-  JOIN users ON users.id = maps.creator_id;
-  `
-  return db.query(queryString)
-    .then(data => {
-      data.rows;
-    })
-    .then(maps => {
-      res.json({ maps });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
-
 module.exports = router;
+
