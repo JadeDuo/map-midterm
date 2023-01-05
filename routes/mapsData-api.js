@@ -12,10 +12,11 @@ const mapQueries = require('../db/queries/maps');
 
 
 router.get('/', (req, res) => {
+  console.log('server Test:', req.session.userID)
   const query = `
   SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
   FROM maps
-  WHERE creator_id = 1;
+  WHERE creator_id = ${req.session.userID || 1};
   `;
   db.query(query)
     .then(data => {

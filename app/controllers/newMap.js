@@ -2,7 +2,6 @@
 let globalMapInfo = {};
 
 function initMap() {
-  console.log("New map controller");
   let map;
 
   //start default map at north america

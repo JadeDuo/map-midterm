@@ -87,6 +87,18 @@ app.views['edit'] = `
             <input class="field" id="img" name="img_link" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
+        <tr>
+          <td class="label">
+            <label for="marker-genre">Select Genre:</label>
+          <select> 
+            <option value="">--Please choose a category--</option>
+            <option value="action">Action</option>
+            <option value="horror">Horror</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+          </select>
+        </tr>
 
         <tr>
           <td></td>
@@ -116,7 +128,7 @@ app.views['home'] = `<h2>Welcome to Movie Mapper</h2>
 app.views['login'] = `
   <h2>Login Existing User</h2>
 
-  <form action="/login" method="POST">
+  <form id="login-form">
     <div class="form">
       <table>
         <tr>
@@ -127,16 +139,7 @@ app.views['login'] = `
             <input class="field" id="login-email" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
-        <tr>
-          <td class="label">
-            <label for="password">Password:</label>
-          </td>
-          <td>
-            <input class="field" id="login-password" type="password" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-
-
+        
         <tr>
           <td></td>
           <td><button type="submit">Submit</button></td>
@@ -147,38 +150,6 @@ app.views['login'] = `
     </div>
   </form>
 
-  <h2>Register New User</h2>
-
-  <form action="/register" method="POST">
-    <div class="form">
-      <table>
-        <tr>
-          <td class="label">
-            <label for="email">Email:</label>
-          </td>
-          <td>
-            <input class="field" id="login-email" type="text" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-        <tr>
-          <td class="label">
-            <label for="password">Password:</label>
-          </td>
-          <td>
-            <input class="field" id="login-password" type="password" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-
-
-        <tr>
-          <td></td>
-          <td><button type="submit">Submit</button></td>
-        </tr>
-
-
-      </table>
-    </div>
-  </form>
 
 `
 app.views['myMaps'] = `
@@ -367,8 +338,6 @@ const initMap = () => {
       addMarkersArray()
     })
 };
-
-
 
 
 
@@ -584,6 +553,28 @@ app.onLoad(() => {
   //initMap();
 })
 
+//req.session.user =
+
+$(document).ready(() => {
+  console.log(loggedInUser)
+  document.getElementById("login-form").addEventListener("submit", event => {
+    event.preventDefault();
+    const loginEmail = { email: $("#login-email").val()}
+
+    $.ajax({
+      method: 'POST',
+      url: '/api/users',
+      data: JSON.stringify(loginEmail),
+      contentType: "application/json; charset=utf-8",
+      success: () => console.log('post success')
+    })
+    .then((response) => {
+      loggedInUser = response.email
+      $('#user-name').text(loggedInUser).appendTo(loggedInUser);
+    })
+  })   
+});
+
 }
 app.controllers['myMaps'] = () => {
 //load list of maps using ajax request
@@ -593,6 +584,7 @@ app.controllers['myMaps'] = () => {
 
 app.onLoad(() => {
   //initMap();
+  console.log('This is under MyMaps:', loggedInUser)
 })
 
 }
@@ -822,8 +814,6 @@ const initMap = () => {
       addMarkersArray()
     })
 };
-
-
 
 
 

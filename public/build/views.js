@@ -28,6 +28,18 @@ app.views['edit'] = `
             <input class="field" id="img" name="img_link" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
+        <tr>
+          <td class="label">
+            <label for="marker-genre">Select Genre:</label>
+          <select> 
+            <option value="">--Please choose a category--</option>
+            <option value="action">Action</option>
+            <option value="horror">Horror</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+          </select>
+        </tr>
 
         <tr>
           <td></td>
@@ -57,7 +69,7 @@ app.views['home'] = `<h2>Welcome to Movie Mapper</h2>
 app.views['login'] = `
   <h2>Login Existing User</h2>
 
-  <form action="/login" method="POST">
+  <form id="login-form">
     <div class="form">
       <table>
         <tr>
@@ -68,16 +80,7 @@ app.views['login'] = `
             <input class="field" id="login-email" type="text" style="width: 200px; margin: .5em" />
           </td>
         </tr>
-        <tr>
-          <td class="label">
-            <label for="password">Password:</label>
-          </td>
-          <td>
-            <input class="field" id="login-password" type="password" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-
-
+        
         <tr>
           <td></td>
           <td><button type="submit">Submit</button></td>
@@ -88,38 +91,6 @@ app.views['login'] = `
     </div>
   </form>
 
-  <h2>Register New User</h2>
-
-  <form action="/register" method="POST">
-    <div class="form">
-      <table>
-        <tr>
-          <td class="label">
-            <label for="email">Email:</label>
-          </td>
-          <td>
-            <input class="field" id="login-email" type="text" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-        <tr>
-          <td class="label">
-            <label for="password">Password:</label>
-          </td>
-          <td>
-            <input class="field" id="login-password" type="password" style="width: 200px; margin: .5em" />
-          </td>
-        </tr>
-
-
-        <tr>
-          <td></td>
-          <td><button type="submit">Submit</button></td>
-        </tr>
-
-
-      </table>
-    </div>
-  </form>
 
 `
 app.views['myMaps'] = `
