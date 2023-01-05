@@ -7,21 +7,27 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const db = require('../db/connection');
 
-router.get('/', (req, res) => {
-  return userQueries.getUsers()
-    .then(users => {
-      console.log('router:', users)
-      res.json({ users });
+router.post('/', (req, res) => {
+  const queryString = `
+  SELECT * FROM users
+  WHERE email = '${req.body.email}';
+  `;
+
+  return db.query(queryString)
+    .then(data => {
+      const email = data.rows[0].email
+      console.log('back end:', data.rows[0].email)
+      req.session.userID = data.rows[0].id
+      res.json({email})
     })
+  
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
 });
-
-
 
 module.exports = router;

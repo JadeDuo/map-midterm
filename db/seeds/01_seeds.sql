@@ -1,8 +1,8 @@
 INSERT INTO users (email)
 VALUES 
-('Jesse@telus.com'),
-('Jade@telus.com'),
-('John@telus.com')
+('jesse@telus.com'),
+('jade@telus.com'),
+('john@telus.com')
 ;
 
 INSERT INTO icons (icon_name, img_src)
