@@ -149,7 +149,7 @@ const initMap = () => {
     })
 };
 
-window.initMap = initMap;
+
 
 
 //MAP FORM DATA /////////////////////////
