@@ -23,7 +23,13 @@ const getOptions = () => {
         },
         strictBounds: false
       },
-      zoom: Number(zoom)
+      zoom: Number(zoom),
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      rotateControl: false,
+      fullscreenControl: false
+
     }
 
     return options;
