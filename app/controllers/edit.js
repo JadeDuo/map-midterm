@@ -161,6 +161,8 @@ $(document).ready(() => {
     let arr = []
     console.log(formData.entries);
 
+    $('#genre-id').find("option:selected").text()
+
     for (let pair of formData.entries()) {
       arr.push(pair[1])
     }
