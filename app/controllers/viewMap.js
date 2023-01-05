@@ -26,7 +26,6 @@ const getOptions = () => {
       zoom: Number(zoom)
     }
 
-    console.log(options);
     return options;
   })
 };
@@ -104,8 +103,6 @@ const placeMarker = location => {
     lng
   }
 
-  console.log(`lat: ${lat}, lng: ${lng}`);
-  console.log('marker: ', tempMarker);
 
   markers.push(tempMarker);
   showMarkers();
@@ -133,7 +130,6 @@ const initMap = () => {
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
-      console.log('test map:', testmap)
 
       google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
 

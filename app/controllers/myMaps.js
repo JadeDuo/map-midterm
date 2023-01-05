@@ -9,19 +9,19 @@ app.onLoad(() => {
 })
 
 
-// // Client facing scripts here
-// $(document).ready(() => {
-//   $('#fetch-users').on('click', () => {
-//     $.ajax({
-//       method: 'GET',
-//       url: '/api/users'
-//     })
-//     .done((response) => {
-//       const $usersList = $('#users');
-//       $usersList.empty();
-//       for(const user of response.users) {
-//         $(`<li class="user">`).text(user.email).appendTo($usersList);
-//       }
-//     })
-//   });
-// });
+// Client facing scripts here
+$(document).ready(() => {
+    $.ajax({
+      method: 'GET',
+      url: '/api/mapsdata/my_maps'
+    })
+    .done((response) => {
+      console.log('front-end:', response)
+      const $usersList = $('#my-map-list');
+      $usersList.empty();
+
+      for(const map of response.maps) {
+        $(`<a href="view/:${map.id}">`).text(map.title).appendTo('#my-map-list');
+      }
+    })
+});

@@ -27,7 +27,6 @@ const getOptions = () => {
       zoom: Number(zoom)
     }
 
-    console.log(options);
     return options;
   })
 };
@@ -100,9 +99,6 @@ const placeMarker = location => {
   let lat = tempMarker.getPosition().lat();
   let lng = tempMarker.getPosition().lng();
 
-  console.log(`lat: ${lat}, lng: ${lng}`);
-  console.log('marker: ', tempMarker);
-
   markers.push(tempMarker);
   showMarkers();
 };
@@ -126,11 +122,9 @@ const deleteMarkers = () => {
 
 // generate google map with pre-set lat/long and zoom for NYC
 const initMap = () => {
-  console.log("home controller");
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
-      console.log('test map:', testmap)
 
       google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
 
