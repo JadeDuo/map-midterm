@@ -52,7 +52,7 @@ router.post('/newmap', (req, res) => {
 
 router.get('/my_maps', (req, res) => {
   return db.query(`
-  SELECT creator_id, maps.id, title, north, south, east, west, zoom, center_lat, center_lng
+  SELECT maps.id, title
   FROM maps
   JOIN users ON users.id = ${req.session.userID};
   `)
