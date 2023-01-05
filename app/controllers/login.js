@@ -20,8 +20,8 @@ $(document).ready(() => {
     })
     .then((response) => {
       loggedInUser = response.email
-      $('#user-name').text(loggedInUser).appendTo(loggedInUser);
-    }); // <--- remember to remove!
-    //login .then here 
+      $('#user-name').text(loggedInUser);
+      $(".nav a[href='/myMaps']").click();
+    }); 
   }) 
 });

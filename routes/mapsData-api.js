@@ -89,7 +89,7 @@ router.get('/maps_json', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id
   const viewMapQuery = `
-  SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
+  SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng, id
   FROM maps
   WHERE id = ${id || 1};
   `

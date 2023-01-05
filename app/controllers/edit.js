@@ -21,10 +21,9 @@ const placeMarker = (location) => {
   let lat = tempMarker.getPosition().lat();
   let lng = tempMarker.getPosition().lng();
 
-  console.log('lat:', lat, 'lng:', lng)
-
   globalMarkerInfo.lat = lat,
   globalMarkerInfo.lng = lng
+  globalMarkerInfo.map_id = setMap.id
 };
 
 app.onLoad(() => {
@@ -55,7 +54,7 @@ $(document).ready(() => {
     globalMarkerInfo.location_name = [...arr][0]
     globalMarkerInfo.info = [...arr][1]
     globalMarkerInfo.img_link = [...arr][2]
-    globalMarkerInfo.icon_name = genre
+    globalMarkerInfo.icon_id = genre
   }
 
   document.getElementById("new-marker-form").addEventListener("submit", function (e) {

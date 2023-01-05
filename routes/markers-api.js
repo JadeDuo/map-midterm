@@ -42,10 +42,10 @@ router.post('/newmarker', (req, res) => {
       .then(data => {
 
         const markerID = data.rows[0].marker_info_id
-        const values = [marker.lat, marker.lng, markerID]
+        const values = [marker.map_id, marker.lat, marker.lng, markerID, marker.icon_id]
         const insertNewMarker = `
-        INSERT INTO markers (lat, lng, marker_info_id)
-        VALUES ($1, $2, $3) RETURNING id as marker_info_id;
+        INSERT INTO markers (map_id, lat, lng, marker_info_id, icon_id)
+        VALUES ($1, $2, $3, $4, $5) RETURNING id as marker_info_id;
         `;
 
         db.query(insertNewMarker, values)
