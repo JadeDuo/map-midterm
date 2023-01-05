@@ -1,5 +1,4 @@
 //previously app.js
-console.log('this is the edit.js controller')
 
 let globalMarkerInfo = {};
 
@@ -14,8 +13,6 @@ const getOptions = () => {
   })
   .then(data => {
     const { id, lat, lng, north, south, east, west, zoom } = data.mapsData[0]
-    console.log('this is the id: ', id)
-    console.log('this is our data: ', data)
     globalMarkerInfo.map_id = id;
 
     options = {
@@ -32,7 +29,6 @@ const getOptions = () => {
       zoom: Number(zoom)
     }
 
-    console.log(options);
     return options;
   })
 };
@@ -105,9 +101,6 @@ const placeMarker = location => {
   let lat = tempMarker.getPosition().lat();
   let lng = tempMarker.getPosition().lng();
 
-  console.log(`lat: ${lat}, lng: ${lng}`);
-  console.log('marker: ', tempMarker);
-
   globalMarkerInfo.lat = lat,
   globalMarkerInfo.lng = lng
 
@@ -137,7 +130,6 @@ const initMap = () => {
   getOptions()
     .then(options => {
       testmap = new google.maps.Map(document.getElementById('map'), options);
-      console.log('test map:', testmap)
 
       google.maps.event.addListener(testmap, 'click', event => placeMarker(event.latLng));
 
@@ -159,10 +151,9 @@ $(document).ready(() => {
   const getData = form => {
     let formData = new FormData(form);
     let arr = []
-    console.log(formData.entries);
 
-    $('#genre-id').find("option:selected").text()
-
+    const genre = $("#genre-id option:checked").val(); 
+  
     for (let pair of formData.entries()) {
       arr.push(pair[1])
     }
@@ -170,6 +161,7 @@ $(document).ready(() => {
     globalMarkerInfo.location_name = [...arr][0]
     globalMarkerInfo.info = [...arr][1]
     globalMarkerInfo.img_link = [...arr][2]
+    globalMarkerInfo.icon_name = genre
   }
 
   document.getElementById("new-marker-form").addEventListener("submit", function (e) {
@@ -181,9 +173,6 @@ $(document).ready(() => {
 });
 
 const submitData = (data) => {
-
-  console.log(data);
-
   $.ajax({
     type: 'post',
     url: '/api/markers/newmarker',

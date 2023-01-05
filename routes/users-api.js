@@ -18,7 +18,6 @@ router.post('/', (req, res) => {
   return db.query(queryString)
     .then(data => {
       const email = data.rows[0].email
-      console.log('back end:', data.rows[0].email)
       req.session.userID = data.rows[0].id
       res.json({email})
     })

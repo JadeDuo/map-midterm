@@ -8,9 +8,9 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
+const { route } = require('./markers-api');
 
 router.get('/', (req, res) => {
-  console.log('server Test:', req.session.userID)
   const query = `
   SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
   FROM maps
@@ -48,6 +48,24 @@ router.post('/newmap', (req, res) => {
   }
 
   addMap(req.body)
+})
+
+router.get('/my_maps', (req, res) => {
+  return db.query(`
+  SELECT creator_id, maps.id, title, north, south, east, west, zoom, center_lat, center_lng
+  FROM maps
+  JOIN users ON users.id = ${req.session.userID};
+  `)
+  .then(data => {
+    const maps = data.rows;
+    res.json({ maps });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+
 })
 
 

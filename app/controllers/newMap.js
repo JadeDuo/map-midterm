@@ -61,8 +61,6 @@ app.onLoad(() => {
 
 const submitData = (data) => {
 
-  console.log(data);
-
   $.ajax({
     type: 'post',
     url: '/api/mapsdata/newmap',
