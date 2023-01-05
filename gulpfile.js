@@ -42,3 +42,7 @@ gulp.task("build-concat", (done) => {
 })
 
 gulp.task('build', gulp.series('build-views', 'build-controllers', 'build-concat'))
+
+gulp.task('watch', (done) => {
+  gulp.watch("app/**/*.js", gulp.series('build-views', 'build-controllers', 'build-concat'));
+});

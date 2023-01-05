@@ -159,6 +159,9 @@ $(document).ready(() => {
   const getData = form => {
     let formData = new FormData(form);
     let arr = []
+    console.log(formData.entries);
+
+    $('#genre-id').find("option:selected").text()
 
     for (let pair of formData.entries()) {
       arr.push(pair[1])
@@ -166,7 +169,7 @@ $(document).ready(() => {
 
     globalMarkerInfo.location_name = [...arr][0]
     globalMarkerInfo.info = [...arr][1]
-    globalMarkerInfo.img_link = [...arr][1]
+    globalMarkerInfo.img_link = [...arr][2]
   }
 
   document.getElementById("new-marker-form").addEventListener("submit", function (e) {
