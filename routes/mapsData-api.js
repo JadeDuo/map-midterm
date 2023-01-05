@@ -8,14 +8,13 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
-const mapQueries = require('../db/queries/maps');
-
 
 router.get('/', (req, res) => {
+  console.log('server Test:', req.session.userID)
   const query = `
   SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
   FROM maps
-  WHERE creator_id = 1;
+  WHERE creator_id = ${req.session.userID || 1};
   `;
   db.query(query)
     .then(data => {
@@ -31,8 +30,6 @@ router.get('/', (req, res) => {
 
 
 router.post('/newmap', (req, res) => {
-
-  console.log(req.body)
 
   const addMap = function (map) {
 
@@ -55,7 +52,15 @@ router.post('/newmap', (req, res) => {
 
 
 router.get('/maps_json', (req, res) => {
-  mapQueries.getMaps()
+  const queryString = `
+  SELECT creator_id, maps.id, title, north, south, east, west, zoom, center_lat, center_lng
+  FROM maps
+  JOIN users ON users.id = maps.creator_id;
+  `
+  return db.query(queryString)
+    .then(data => {
+      data.rows;
+    })
     .then(maps => {
       res.json({ maps });
     })
