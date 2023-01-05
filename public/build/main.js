@@ -52,6 +52,9 @@ $(document).ready(() => {
     window.history.pushState({}, href, href)
   });
 })
+
+let loggedInUser;
+
 //app.loaded calls the onload callbacks of current controller.
 window.initMap = function() {
   app.loaded();
