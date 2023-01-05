@@ -553,8 +553,6 @@ app.onLoad(() => {
   //initMap();
 })
 
-//req.session.user =
-
 $(document).ready(() => {
   console.log(loggedInUser)
   document.getElementById("login-form").addEventListener("submit", event => {
@@ -584,8 +582,26 @@ app.controllers['myMaps'] = () => {
 
 app.onLoad(() => {
   //initMap();
-  console.log('This is under MyMaps:', loggedInUser)
+
 })
+
+
+// // Client facing scripts here
+// $(document).ready(() => {
+//   $('#fetch-users').on('click', () => {
+//     $.ajax({
+//       method: 'GET',
+//       url: '/api/users'
+//     })
+//     .done((response) => {
+//       const $usersList = $('#users');
+//       $usersList.empty();
+//       for(const user of response.users) {
+//         $(`<li class="user">`).text(user.email).appendTo($usersList);
+//       }
+//     })
+//   });
+// });
 
 }
 app.controllers['newMap'] = () => {
@@ -593,7 +609,6 @@ app.controllers['newMap'] = () => {
 let globalMapInfo = {};
 
 function initMap() {
-  console.log("New map controller");
   let map;
 
   //start default map at north america
