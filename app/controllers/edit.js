@@ -61,28 +61,22 @@ $(document).ready(() => {
     e.preventDefault();
     getData(e.target);
     submitData(globalMarkerInfo);
-
-    new Promise((resolve, reject) => {
-      initMap()
-      resolve()
-    })
-    .then(() => {
+    $(".nav a[href='/myMaps']").click();
+    setTimeout(() => {
       tempMarker = {};
       addMarkersArray()
-      // $(".nav a[href='/myMaps']").click();
-    })
-    .catch(console.log)
+    }, 500);
+    
   });
 
   $(document).on('click', '.marker_ids', function (e) {
     e.preventDefault();
-    console.log('we stopped it!')
-
+ 
     $.ajax({
       method: 'GET',
       url: e.target.href
     })
-    .then((response) => $(".nav a[href='/myMaps']").click())
+    .then((response) => {$(".nav a[href='/myMaps']").click()})
   });
 });
 
