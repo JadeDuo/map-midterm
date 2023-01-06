@@ -1,31 +1,23 @@
-/*
- * All routes for User Data are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /api/users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
 
+
 //----------------- FAVORITES -----------------//
-
-router.get('/fav_list', (req, res) => {
-
-});
-
-router.post('/add_fav', (req, res) => {
+router.get('/fav_list', (req, res) => {  // <---- Get all Favorites by user
 
 });
 
-router.post('/rem_fav', (req, res) => {
+router.post('/add_fav', (req, res) => { // <---- Add favorite for user
+
+});
+
+router.post('/rem_fav', (req, res) => { // < --- remove favorite for user
 
 });
 
 
 //--------------- Login -----------------//
-
 router.post('/', (req, res) => {
   const queryString = `
   SELECT * FROM users
@@ -46,8 +38,8 @@ router.post('/', (req, res) => {
     });
 });
 
-// --------------- logout -----------------//
 
+// --------------- logout -----------------//
 router.post('/logout', (req, res) => {
   console.log(req.session)
   req.session = null;

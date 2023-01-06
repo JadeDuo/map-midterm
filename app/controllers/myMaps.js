@@ -101,7 +101,6 @@ const addMarkersArray = () => {
     })
     .done(() => {
       markerArray.forEach(properties => addSetMarkers(properties))
-      console.log('for each done! (I think?)')
     })
 };
 
