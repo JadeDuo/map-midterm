@@ -43,7 +43,7 @@ app.onLoad(() => {
 
 })
 //event listener for edit button
-$("#edit-button").on('click', handler)
+$(".edit-button").on('click', handler)
 
 //------------MAP HELPER FUNCTIONS ------------//
 
