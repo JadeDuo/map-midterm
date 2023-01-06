@@ -28,40 +28,26 @@ $(document).ready(() => {
       for (const map of response.maps) {  // Add list of maps associated with user ID
         $(`<a class="all-map-list map-list" href="/api/mapsdata/${map.id}">`).text(map.title).appendTo('#all-maps-list');
       }
+      $('.all-map-list').on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+          method: 'GET',
+          url: e.target.href
+        })
+        .then((response) => {
+          setMap = mapDisplay(response)
+          testmap = new google.maps.Map(document.getElementById('map'), mapDisplay(response)); // Build new map with AJAX return
+          addMarkersArray() // Add markers from DB to map
+          })
     })
 
-  $(document).on('click', '.all-map-list', function (e) {
-    e.preventDefault();
 
-    $.ajax({
-      method: 'GET',
-      url: e.target.href
-    })
-    .then((response) => {
-      setMap = mapDisplay(response)
-      testmap = new google.maps.Map(document.getElementById('map'), mapDisplay(response)); // Build new map with AJAX return
-      addMarkersArray() // Add markers from DB to map
-      })
   });
 
 
-  // ------------ FAVORITES HERE ----------------------- //
 
-  // {Please add event listener refactor}
-  $(document).one('click', '.fave-button', function (e) {
-    e.preventDefault
-    const map_id = { map_id: setMap.id }
 
-    $.ajax({
-      type: 'post',
-      url: '/api/users/add_fave',
-      data: JSON.stringify(map_id),
-      contentType: "application/json; charset=utf-8",
-      success: function (data) {
-        console.log('post success')
-      }
-    })
-  })
 });
 
 app.onLoad(() => {
