@@ -24,9 +24,7 @@
   flex-direction: column;
 }
 
-.all-map-list {
-  padding: .5em;
-}
+
 
 .button-holder {
   display: flex;
@@ -142,6 +140,7 @@ footer a:active {
 .map-list {
   color: white;
   text-decoration: none;
+  padding: .5em;
 
 }
 
@@ -176,7 +175,81 @@ footer a:active {
 
 }
 
+.all-map-list {
+  color: white;
+  text-decoration: none;
+  padding: .5em;
 
+}
+
+.all-map-list a {
+  color: white;
+  text-decoration: none;
+
+}
+
+.all-map-list a:link {
+  color: white;
+  text-decoration: none;
+
+}
+
+.all-map-list a:visited{
+  color: white;
+  text-decoration: none;
+
+}
+
+.all-map-list a:active{
+  color: white;
+  text-decoration: none;
+
+}
+
+.all-map-list a:hover{
+  color: #b09926;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+.fave-map-list {
+  color: white;
+  text-decoration: none;
+  padding: .5em;
+
+}
+
+.fave-map-list a {
+  color: white;
+  text-decoration: none;
+
+}
+
+.fave-map-list a:link {
+  color: white;
+  text-decoration: none;
+
+}
+
+.fave-map-list a:visited{
+  color: white;
+  text-decoration: none;
+
+}
+
+.fave-map-list a:active{
+  color: white;
+  text-decoration: none;
+
+}
+
+.fave-map-list a:hover{
+  color: #b09926;
+  cursor: pointer;
+  text-decoration: none;
+
+}
 
 
 
