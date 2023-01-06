@@ -56,6 +56,7 @@ $(document).ready(() => {
       url: '/api/users/logout',
       success: data => console.log('post success')
     })
+    let loggedInUser = '';
     $(".nav a[href='/']").click();
     $('#user-name').text('');
     $('.logged-in').hide();
@@ -82,3 +83,13 @@ let setMap;
 window.initMap = function () {
   app.loaded();
 }
+
+jQuery.event.special.touchstart = {
+  setup: function( _, ns, handle ){
+    if ( ns.includes("noPreventDefault") ) {
+      this.addEventListener("touchstart", handle, { passive: false });
+    } else {
+      this.addEventListener("touchstart", handle, { passive: true });
+    }
+  }
+};

@@ -9,6 +9,23 @@ const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
 
+//----------------- FAVORITES -----------------//
+
+router.get('/fav_list', (req, res) => {
+
+});
+
+router.post('/add_fav', (req, res) => {
+
+});
+
+router.post('/rem_fav', (req, res) => {
+
+});
+
+
+//--------------- Login -----------------//
+
 router.post('/', (req, res) => {
   const queryString = `
   SELECT * FROM users
@@ -28,6 +45,8 @@ router.post('/', (req, res) => {
         .json({ error: err.message });
     });
 });
+
+// --------------- logout -----------------//
 
 router.post('/logout', (req, res) => {
   console.log(req.session)

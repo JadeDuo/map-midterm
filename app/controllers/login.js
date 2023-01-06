@@ -6,7 +6,6 @@ app.onLoad(() => {
 // ------------- LOGIN TO USER / SET COOKIES --------------//
 
 $(document).ready(() => {
-  console.log(loggedInUser)
   document.getElementById("login-form").addEventListener("submit", event => {
     event.preventDefault();
     const loginEmail = { email: $("#login-email").val()}

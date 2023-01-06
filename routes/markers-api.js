@@ -9,6 +9,9 @@ const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
 
+
+
+// ---------------------- GET ALL MARKERS ---------------------- //
 router.get('/', (req, res) => {
   const queryString = `
   SELECT markers.lat AS lat, markers.lng AS lng, location_name, info, img_link, img_src, markers.id
@@ -28,10 +31,10 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// ------------------- DELETE MARKERS ---------------------- //
 router.get('/:id', (req, res) => {
   const id = req.params.id
-
-  console.log('got here, have an id:', id)
   const viewMapQuery = `
   DELETE FROM markers
   WHERE id = ${id};
@@ -49,7 +52,7 @@ router.get('/:id', (req, res) => {
   
 })
 
-//add new marker
+// ------------------- ADD NEW MARKERS ---------------------- //
 router.post('/newmarker', (req, res) => {
   const addMarker = function (marker) {
 

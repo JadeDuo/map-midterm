@@ -5,7 +5,7 @@ $(document).ready(() => {
     url: '/api/mapsdata/my_maps'
   })
     .done((response) => {
-      addMarkersArray() // Take me out if you want
+      // addMarkersArray() // Take me out if you want
       const $usersList = $('#my-map-list');
       $usersList.empty();
 
@@ -93,6 +93,7 @@ const addMarkersArray = () => {
     })
     .done(() => {
       markerArray.forEach(properties => addSetMarkers(properties))
+      console.log('for each done! (I think?)')
     })
 };
 
