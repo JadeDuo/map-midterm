@@ -80,12 +80,14 @@ body {
 .nav span {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   font-size: x-large;
 }
 
 .nav a {
+  padding-left: 2em;
+  padding-right: 2em;
   color: white;
   transition: font-size 1s;
 }
