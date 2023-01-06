@@ -40,7 +40,7 @@ router.post('/add_fave', (req, res) => { // <---- Add favorite for user
 });
 
 router.post('/rem_fave', (req, res) => { // < --- remove favorite for user
-
+// STRETCH
 });
 
 

@@ -111,5 +111,31 @@ router.post('/newmap', (req, res) => {
   addMap(req.body)
 })
 
+
+// ------------- DELETE MAP FROM DATABASE ---------------//
+router.post('/delete', (req, res) => {
+  const id = req.body.map_id
+  console.log('back end checking in!!', id)
+
+  const viewMapQuery = `
+  DELETE FROM maps
+  WHERE id = ${id}
+  AND creator_id = ${req.session.userID}
+  `
+
+  db.query(viewMapQuery)
+  .then(data => {
+    res.json({data})
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+  
+})
+
+
+
 module.exports = router;
 

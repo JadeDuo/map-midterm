@@ -51,6 +51,25 @@ $(document).ready(() => {
     })
   })
 
+  // DELETE BUTTON //
+  $(document).on('click', '.delete-button', function (e) {
+    e.preventDefault
+    const map_id = { map_id: setMap.id }
+
+// {Please add event listener refactor}
+    $.ajax({
+      type: 'post',
+      url: '/api/mapsdata/delete',
+      data: JSON.stringify(map_id),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log('post success')
+      }
+    })
+  })
+
+
+
 
 });
 

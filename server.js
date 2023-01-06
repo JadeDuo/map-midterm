@@ -40,7 +40,6 @@ app.use(cookieSession({
 
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const markerApiRoutes = require('./routes/markers-api');
 const mapsDataApiRoutes = require('./routes/mapsData-api');
@@ -48,14 +47,9 @@ const mapsDataApiRoutes = require('./routes/mapsData-api');
 
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-// Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
 app.use('/api/markers', markerApiRoutes)
 app.use('/api/mapsdata', mapsDataApiRoutes);
-
-//app.use('/newmap', newMapRoutes);
-// Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -65,17 +59,8 @@ app.get('/', (req, res) => {
   res.render('index', {path: ""});
 });
 
-app.get('/:any', (req, res) => {
+app.get('/:any', (req, res) => {  // Error handling for any endpoint entered
   res.render('index', {path: req.params.any});
-});
-
-//auto-login for midterm presentation
-app.get('/login/:id', (req, res) => {
-  // set the cookie
-  req.session.user_id = req.params.id;
-
-  //redirect the user
-  res.redirect('/');
 });
 
 app.listen(PORT, () => {
