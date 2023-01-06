@@ -43,6 +43,14 @@ $(document).ready(() => {
       addMarkersArray() // Add markers from DB to map
       })
   });
+// ------------ FAVORITES HERE -----------------------//
+
+
+
+
+
+
+
 });
 
 app.onLoad(() => {
