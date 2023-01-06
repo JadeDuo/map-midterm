@@ -21,6 +21,9 @@ const app = {
     }
   },
   loadCallbacks: [],
+  onViewChange: function (callback) {
+
+  },
   //Called when google maps api is loaded and ready
   loaded: function () {
     app.ready = true;
@@ -69,6 +72,7 @@ const handler = function (e) {
   const route = app.routes[href];
   const view = app.views[route];
 
+  app.onViewChange();
   $('.side-content').html(view);
   app.controllers[route]();
   window.history.pushState({}, href, href)

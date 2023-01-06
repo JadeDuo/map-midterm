@@ -14,7 +14,7 @@ $(document).ready(() => {
       }
     })
 
-  $(document).on('click', '.map-list', function (e) {
+  const mapListListener = function (e) {
     e.preventDefault();
 
     $.ajax({
@@ -26,7 +26,15 @@ $(document).ready(() => {
       testmap = new google.maps.Map(document.getElementById('map'), mapDisplay(response)); // Build new map with AJAX return
       addMarkersArray() // Add markers from DB to map
       })
-  });
+  }
+
+  $(document).on('click', '.map-list', mapListListener)
+  app.onViewChange = function () {
+    $(document).off('click', '.map-list', mapListListener)
+    console.log('my maps marker listener off.')
+  }
+
+
 });
 
 

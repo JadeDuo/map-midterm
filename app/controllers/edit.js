@@ -75,7 +75,8 @@ $(document).ready(() => {
     .catch(console.log)
   });
 
-  $(document).on('click', '.marker_ids', function (e) {
+
+  const markerListener = function (e) {
     e.preventDefault();
     console.log('we stopped it!')
 
@@ -84,10 +85,16 @@ $(document).ready(() => {
       url: e.target.href
     })
     .then((response) => $(".nav a[href='/myMaps']").click())
-  });
+  };
+
+  $(document).on('click', '.marker_ids', markerListener)
+  app.onViewChange = function () {
+    $(document).off('click', '.marker_ids', markerListener)
+    console.log('edit marker listener off.')
+  }
 });
 
-const submitData = (data) => {
+  const submitData = (data) => {
   $.ajax({
     type: 'post',
     url: '/api/markers/newmarker',
