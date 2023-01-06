@@ -62,13 +62,29 @@ $(document).ready(() => {
     e.preventDefault();
     getData(e.target);
     submitData(globalMarkerInfo);
-    $(".nav a[href='/myMaps']").click();
-    setTimeout(() => {
+
+    new Promise((resolve, reject) => {
+      initMap()
+      resolve()
+    })
+    .then(() => {
       tempMarker = {};
       addMarkersArray()
-    }, 500);
+      // $(".nav a[href='/myMaps']").click();
+    })
+    .catch(console.log)
   });
 
+  $(document).on('click', '.marker_ids', function (e) {
+    e.preventDefault();
+    console.log('we stopped it!')
+
+    $.ajax({
+      method: 'GET',
+      url: e.target.href
+    })
+    .then((response) => $(".nav a[href='/myMaps']").click())
+  });
 });
 
 const submitData = (data) => {
@@ -94,7 +110,7 @@ const addMarkersArray = () => {
   })
     .then(data => {
       for (const marker of data.markers) {
-        const { lat, lng, location_name, info, img_link, img_src } = marker
+        const { lat, lng, location_name, info, img_link, img_src, id } = marker
 
         markerArray.push({
           coordinates: { lat: Number(lat), lng: Number(lng) },
@@ -102,6 +118,7 @@ const addMarkersArray = () => {
           content: `
           <div style="width: 200px">
           <h4>${location_name || '_missing!'}</h4>
+          <a class="marker_ids" href="/api/markers/${id}">Delete!</a>
           <p>${info || '_missing!'}</p>
           <img src="${img_link}" ${defaultSize}>
           </div>
@@ -136,6 +153,6 @@ const addSetMarkers = properties => {
       anchor: marker
     }));
 
-    marker.addListener('mouseout', () => setTimeout(() => infoWindow.close(), 5000));
+    marker.addListener('mouseout', () => setTimeout(() => infoWindow.close(), 3500));
   }
 };

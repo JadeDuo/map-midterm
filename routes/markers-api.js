@@ -11,7 +11,7 @@ const db = require('../db/connection');
 
 router.get('/', (req, res) => {
   const queryString = `
-  SELECT markers.lat AS lat, markers.lng AS lng, location_name, info, img_link, img_src
+  SELECT markers.lat AS lat, markers.lng AS lng, location_name, info, img_link, img_src, markers.id
   FROM markers
   JOIN markers_info ON markers_info.id = markers.marker_info_id
   JOIN icons ON icons.id = icon_id;
@@ -27,6 +27,27 @@ router.get('/', (req, res) => {
         .json({ error: err.message });
     });
 });
+
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+
+  console.log('got here, have an id:', id)
+  const viewMapQuery = `
+  DELETE FROM markers
+  WHERE id = ${id};
+  `
+
+  db.query(viewMapQuery)
+  .then(data => {
+    res.json({data})
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+  
+})
 
 //add new marker
 router.post('/newmarker', (req, res) => {
