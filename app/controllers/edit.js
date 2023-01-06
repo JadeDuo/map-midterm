@@ -70,18 +70,25 @@ $(document).ready(() => {
     
   });
 
-  $(document).on('click', '.marker_ids', function (e) {
+
+  const markerListener = function (e) {
     e.preventDefault();
  
     $.ajax({
       method: 'GET',
       url: e.target.href
     })
-    .then((response) => {$(".nav a[href='/myMaps']").click()})
-  });
+    .then((response) => $(".nav a[href='/myMaps']").click())
+  };
+
+  $(document).on('click', '.marker_ids', markerListener)
+  app.onViewChange = function () {
+    $(document).off('click', '.marker_ids', markerListener)
+    console.log('edit marker listener off.')
+  }
 });
 
-const submitData = (data) => {
+  const submitData = (data) => {
   $.ajax({
     type: 'post',
     url: '/api/markers/newmarker',
