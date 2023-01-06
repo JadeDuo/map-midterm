@@ -2,7 +2,12 @@
 
 const options = {
   center: { lat: 49.406001356798896, lng: -96.07921114305863 },
-  zoom: 4
+  zoom: 4,
+  zoomControl: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    rotateControl: false,
+    fullscreenControl: false,
 }
 
 // -------- generate google map with pre-set lat/long  ----------/

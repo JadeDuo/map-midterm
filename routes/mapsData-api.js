@@ -3,27 +3,6 @@ const router  = express.Router();
 const db = require('../db/connection');
 
 
-//---------- GET ROUTES ----------//
-
-// router.get('/', (req, res) => {
-//   const query = `
-//   SELECT north, south, east, west, zoom, center_lat AS lat, center_lng AS lng
-//   FROM maps
-//   WHERE creator_id = ${req.session.userID || 1};
-//   `;
-//   db.query(query)
-//     .then(data => {
-//       const mapsData = data.rows;
-//       res.json({ mapsData });
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
-
-
 // -------------------------- GET ALL MAPS FOR USER -------------//
 router.get('/my_maps', (req, res) => {
   return db.query(`
