@@ -45,6 +45,8 @@ app.onLoad(() => {
 })
 
 
+
+
 const mapDisplay = (data) => {
   let options = {};
   const { lat, lng, north, south, east, west, zoom } = data.mapsData[0]
