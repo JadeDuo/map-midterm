@@ -51,8 +51,8 @@ VALUES
  ('1428 Elm St', 'Nancys house in Nightmare on Elm Street', 'https://images.mktw.net/im-421396?width=700&height=487'),
  ('Sound of Music', 'the field you know from sound of music!', 'https://m.media-amazon.com/images/M/MV5BMjEyNDc2MDMyNV5BMl5BanBnXkFtZTcwNDU0MTUzNA@@._V1_.jpg'),
  ('SuperSize Me', 'Mcdonalds location that guy at all that fast food at in the documentary', 'https://www.themoviebuff.net/wp-content/uploads/2016/02/supersize-me-3.jpg'),
- ('SuperSize Me', 'Mcdonalds location that guy at all that fast food at in the documentary', 'https://www.themoviebuff.net/wp-content/uploads/2016/02/supersize-me-3.jpg'),
- ('SuperSize Me', 'Mcdonalds location that guy at all that fast food at in the documentary', 'https://www.themoviebuff.net/wp-content/uploads/2016/02/supersize-me-3.jpg'),
+ ('Zoo', 'We bought a zoo, this zoo', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuroYGJMPVTyRQsXvbZp9BhBtdozoyKbKSvQ&usqp=CAU'),
+ ('Rocky Statue', 'The statue used in the actual films', 'https://www.associationforpublicart.org/wp-content/uploads/2015/10/Rocky_1400x1400.jpg'),
  ('Empire State building', 'king kong climbed this', 'https://i.pinimg.com/originals/fb/c2/43/fbc243f4ad26d992260d44d544835524.jpg')
 ;
 
