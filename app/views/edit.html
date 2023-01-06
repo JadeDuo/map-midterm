@@ -1,52 +1,43 @@
+<h2>Add new markers!</h2>
+<p>Click on the map to drop your marker at a filming location.</p>
+<form id="new-marker-form">
+  <div class="mb-3">
+    <label for="location-name" class="form-label">Location:</label>
+    <input id="location" name="location_name" type="text" class="form-control" />
+  </div>
 
-  <h2>Add new markers!</h2>
-  <p>Click on the map to drop your marker at a filming location.</p>
-  <form id="new-marker-form">
-    <div class="form row mb-3">
-      <label for="location-name" class="col-sm-2 col-form-label">Location:</label>
-      <div class="col-sm-10">
-        <input id="location" name="location_name" type="text" class="field form-control" />
-      </div>
+
+  <div class="mb-3">
+    <label for="location-info" class="form-label">Description:</label>
+      <input id="info" name="info" type="text" class="form-control" />
     </div>
 
-    <div class="row mb-3">
-      <label for="location-info" class="col-sm-2 col-form-label">Description:</label>
-        <div class="col-sm-10">
-            <input id="info" name="info" type="text" class="field form-control" />
-        </div>
-      </div>
 
-      <div class="row mb-3">
-        <label for="img-link" class="col-sm-2 col-form-label">Image URL:</label>
-          <div class="col-sm-10">
-              <input id="img" name="img_link" type="text" class="field form-control" />
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="marker-genre" class="form-label">Genre:</label>
-          <select class="form-select" id="genre-id" required>
-            <option value="1">Action</option>
-            <option value="2">Horror</option>
-            <option value="3">Comedy</option>
-            <option value="4">Historic</option>
-            <option value="5">Sci-Fi</option>
-            <option value="6">Fantasy</option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <button class="btn btn-primary" type="submit">beeeep</button>
-        </div>
-
-
-
-
-  </form>
-
-  <br>
-
-  <div id="marker-view-panel">
-    <input id="toggle-markers" type="button" value="Toggle Markers" />
+  <div class="mb-3">
+    <label for="img-link" class="form-label">Image URL:</label>
+      <input id="img" name="img_link" type="text" class="form-control" />
   </div>
+
+  <div class="mb-3">
+    <label for="marker-genre" class="form-label">Genre:</label>
+    <select class="form-select" id="genre-id" required>
+      <option value="1">Action</option>
+      <option value="2">Horror</option>
+      <option value="3">Comedy</option>
+      <option value="4">Historic</option>
+      <option value="5">Sci-Fi</option>
+      <option value="6">Fantasy</option>
+      <option value="7">Drama</option>
+      <option value="8">Musical</option>
+      <option value="9">Thriller</option>
+      <option value="10">Western</option>
+      <option value="11">Documentary</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" type="submit">Add Marker</button>
+  </div>
+
+</form>
 

@@ -1,7 +1,3 @@
-app.onLoad(() => {
-  //initMap();
-})
-
 
 // ------------- LOGIN TO USER / SET COOKIES --------------//
 

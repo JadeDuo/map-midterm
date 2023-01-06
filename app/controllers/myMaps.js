@@ -28,35 +28,9 @@ $(document).ready(() => {
       })
   }
 
-  $(document).on('click', '.map-list', mapListListener)
-  app.onViewChange = function () {
-    $(document).off('click', '.map-list', mapListListener)
-    console.log('my maps marker listener off.')
-  }
-
-
-  // FAVORITES BUTTON //
-  $(document).on('click', '.fave-button', function (e) {
-    e.preventDefault
+  const deleteListener = function(e) {
+    e.preventDefault();
     const map_id = { map_id: setMap.id }
-// {Please add event listener refactor}
-    $.ajax({
-      type: 'post',
-      url: '/api/users/add_fave',
-      data: JSON.stringify(map_id),
-      contentType: "application/json; charset=utf-8",
-      success: function (data) {
-        console.log('post success')
-      }
-    })
-  })
-
-  // DELETE BUTTON //
-  $(document).on('click', '.delete-button', function (e) {
-    e.preventDefault
-    const map_id = { map_id: setMap.id }
-
-// {Please add event listener refactor}
     $.ajax({
       type: 'post',
       url: '/api/mapsdata/delete',
@@ -66,10 +40,14 @@ $(document).ready(() => {
         console.log('post success')
       }
     })
-  })
+  }
 
-
-
+  $(document).on('click', '.delete-button', deleteListener)
+  $(document).on('click', '.map-list', mapListListener)
+  app.onViewChange = function () {
+    $(document).off('click', '.map-list', mapListListener)
+    $(document).off('click', '.delete-button', deleteListener)
+  }
 
 });
 

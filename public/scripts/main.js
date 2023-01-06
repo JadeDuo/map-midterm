@@ -49,7 +49,21 @@ $(document).ready(() => {
   $(".nav a").on('click', handler)
   $("footer a").on('click', handler)
 
+  //fave button event listener for my maps and home
+  $(document).on('click', '.fave-button', function (e) {
+    e.preventDefault();
+    const map_id = { map_id: setMap.id }
 
+    $.ajax({
+      type: 'post',
+      url: '/api/users/add_fave',
+      data: JSON.stringify(map_id),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log('post success')
+      }
+    })
+  })
 
   //footer logout button listener
   $("footer button").on('click', function (e) {
@@ -78,10 +92,11 @@ const handler = function (e) {
   app.controllers[route]();
   window.history.pushState({}, href, href)
 };
+
+
 // Logged in user global cookie settings //
 let loggedInUser;
 let setMap;
-
 
 //app.loaded calls the onload callbacks of current controller.
 window.initMap = function () {
