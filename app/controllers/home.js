@@ -26,7 +26,7 @@ $(document).ready(() => {
       $usersList.empty();
 
       for (const map of response.maps) {  // Add list of maps associated with user ID
-        $(`<a class="all-map-list" href="/api/mapsdata/${map.id}">`).text(map.title).appendTo('#all-maps-list');
+        $(`<a class="all-map-list map-list" href="/api/mapsdata/${map.id}">`).text(map.title).appendTo('#all-maps-list');
       }
     })
 
