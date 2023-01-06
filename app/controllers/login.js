@@ -21,7 +21,9 @@ $(document).ready(() => {
     .then((response) => {
       loggedInUser = response.email
       $('#user-name').text(`logged-in as: ${loggedInUser}`);
+      $('.logged-in').show();
+      $('.logged-out').hide();
       $(".nav a[href='/myMaps']").click();
-    }); 
-  }) 
+    });
+  })
 });

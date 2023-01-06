@@ -31,9 +31,11 @@ $(document).ready(() => {
 
 
 app.onLoad(() => {
-  //initMap();
+
 
 })
+//event listener for edit button
+$("#edit-button").on('click', handler)
 
 //------------MAP HELPER FUNCTIONS ------------//
 

@@ -13,7 +13,7 @@ const app = {
     '/faveMaps': 'favoriteMaps'
   },
   //defers google map callback info until api has loaded.
-  onLoad: function(callback) {
+  onLoad: function (callback) {
     if (app.ready) {
       callback();
     } else {
@@ -22,7 +22,7 @@ const app = {
   },
   loadCallbacks: [],
   //Called when google maps api is loaded and ready
-  loaded: function() {
+  loaded: function () {
     app.ready = true;
     app.loadCallbacks.forEach((cb) => {
       cb();
@@ -40,49 +40,45 @@ $(document).ready(() => {
     app.controllers[currentRoute]();
   }
 
-// nav bar links, using href to update view
-  $(".nav a").on('click', function(e) {
+  // makes links and buttons change views, using href to update view and call controller
+
+  //event listeners
+  $(".nav a").on('click', handler)
+  $("footer a").on('click', handler)
+
+
+
+  //footer logout button listener
+  $("footer button").on('click', function (e) {
     e.preventDefault();
-    const href = $(this).attr('href');
-    const route = app.routes[href];
-    const view = app.views[route];
-
-    $('.side-content').html(view);
-    app.controllers[route]();
-    window.history.pushState({}, href, href)
+    $.ajax({
+      method: 'POST',
+      url: '/api/users/logout',
+      success: data => console.log('post success')
+    })
+    $(".nav a[href='/']").click();
+    $('#user-name').text('');
+    $('.logged-in').hide();
+    $('.logged-out').show();
   });
-
-//temp duplicate code of above to listen to footer
-$("footer a").on('click', function(e) {
+})
+// makes links and buttons change views, using href to update view and call controller
+const handler = function (e) {
   e.preventDefault();
   const href = $(this).attr('href');
   const route = app.routes[href];
   const view = app.views[route];
 
   $('.side-content').html(view);
-    app.controllers[route]();
-    window.history.pushState({}, href, href)
-  });
-
-//temp dupe code for button in foot
-$("footer button").on('click', function(e) {
-  e.preventDefault();
-  $.ajax({
-    method: 'POST',
-    url: '/api/users/logout',
-    success: data => console.log('post success')
-  })
-  $(".nav a[href='/']").click();
-  $('#user-name').text('');
-});
-})
-
+  app.controllers[route]();
+  window.history.pushState({}, href, href)
+};
 // Logged in user global cookie settings //
 let loggedInUser;
 let setMap;
 
 
 //app.loaded calls the onload callbacks of current controller.
-window.initMap = function() {
+window.initMap = function () {
   app.loaded();
 }

@@ -35,6 +35,7 @@ app.onLoad(() => {
     addMarkersArray()
   })
   .catch(console.log)
+
 })
 
 // --------- FORM DATA ----------- //

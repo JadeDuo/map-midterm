@@ -14,6 +14,15 @@
   background-repeat: no-repeat;
 }
 
+#my-map-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#all-maps-list {
+  display: flex;
+  flex-direction: column;
+}
 
 body {
   background-color: #565358;
@@ -84,6 +93,12 @@ h2 {
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.logged-in {
+  display: none;
+}
+
+
 
 footer {
   display: flex;
