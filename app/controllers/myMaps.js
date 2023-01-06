@@ -35,6 +35,23 @@ $(document).ready(() => {
   }
 
 
+  // FAVORITES BUTTON //
+  $(document).on('click', '.fave-button', function (e) {
+    e.preventDefault
+    const map_id = { map_id: setMap.id }
+// {Please add event listener refactor}
+    $.ajax({
+      type: 'post',
+      url: '/api/users/add_fave',
+      data: JSON.stringify(map_id),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log('post success')
+      }
+    })
+  })
+
+
 });
 
 

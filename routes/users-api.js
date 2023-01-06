@@ -4,15 +4,42 @@ const db = require('../db/connection');
 
 
 //----------------- FAVORITES -----------------//
-router.get('/fav_list', (req, res) => {  // <---- Get all Favorites by user
+router.get('/fave_list', (req, res) => {  // <---- Get all Favorites by user
+  return db.query(`
+  SELECT maps.id, maps.title
+  FROM maps
+  JOIN users ON users.id = creator_id
+  JOIN favorites on maps.id = map_id
+  WHERE user_id = ${req.session.userID};
+  `)
+  .then(data => {
+    const maps = data.rows;
+    res.json({ maps });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 
 });
 
-router.post('/add_fav', (req, res) => { // <---- Add favorite for user
-
+router.post('/add_fave', (req, res) => { // <---- Add favorite for user
+  const values = [req.session.userID, req.body.map_id]
+  const queryString = `
+  INSERT INTO favorites (user_id, map_id)
+  VALUES ($1, $2);
+  `
+  return db.query(queryString, values)
+    .then (data => {
+      res.json({data})
+    })
+    .catch((err) => {
+      console.log(err.message);
+    })
 });
 
-router.post('/rem_fav', (req, res) => { // < --- remove favorite for user
+router.post('/rem_fave', (req, res) => { // < --- remove favorite for user
 
 });
 

@@ -43,14 +43,25 @@ $(document).ready(() => {
       addMarkersArray() // Add markers from DB to map
       })
   });
-// ------------ FAVORITES HERE -----------------------//
 
 
+  // ------------ FAVORITES HERE ----------------------- //
 
+  // {Please add event listener refactor}
+  $(document).one('click', '.fave-button', function (e) {
+    e.preventDefault
+    const map_id = { map_id: setMap.id }
 
-
-
-
+    $.ajax({
+      type: 'post',
+      url: '/api/users/add_fave',
+      data: JSON.stringify(map_id),
+      contentType: "application/json; charset=utf-8",
+      success: function (data) {
+        console.log('post success')
+      }
+    })
+  })
 });
 
 app.onLoad(() => {
@@ -62,7 +73,7 @@ app.onLoad(() => {
 
 const mapDisplay = (data) => {
   let options = {};
-  const { lat, lng, north, south, east, west, zoom } = data.mapsData[0]
+  const { lat, lng, north, south, east, west, zoom, id } = data.mapsData[0]
 
   options = {
     center: { lat: Number(lat), lng: Number(lng) },
@@ -80,8 +91,8 @@ const mapDisplay = (data) => {
     mapTypeControl: false,
     scaleControl: false,
     rotateControl: false,
-    fullscreenControl: false
-
+    fullscreenControl: false,
+    id
   }
 
   return options;
